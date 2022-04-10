@@ -8,6 +8,7 @@ import javax.persistence.Embeddable;
 @Getter
 public class bigThreePower {
 
+
     private int squat;
     private int bench;
     private int dead;

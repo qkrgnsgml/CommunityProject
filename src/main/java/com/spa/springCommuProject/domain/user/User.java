@@ -23,6 +23,7 @@ public class User {
     private String loginId;
     private String password;
 
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @Embedded
@@ -31,4 +32,8 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Post> posts = new ArrayList<>();
 
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

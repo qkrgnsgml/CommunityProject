@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action th:object="${userDTO}" method="post">
+    <div>
+        <input type="text" th:field="*{nickName}" placeholder="닉네임">
+        <input type="text" th:field="*{loginId}" placeholder="아이디">
+        <input type="text" th:field="*{password}" placeholder="패스워드">
+    </div>
+    <button type="submit"> 등록 </button>
+</form>
+</body>
+</html>
