@@ -10,7 +10,6 @@ import java.util.List;
 
 @Entity
 @Getter
-@Setter
 public class User {
 
     @Id
@@ -18,8 +17,10 @@ public class User {
     @Column(name = "user_id")
     private Long id;
 
+    @Column(unique = true)
     private String nickName;
 
+    @Column(unique = true)
     private String loginId;
     private String password;
 
@@ -35,5 +36,20 @@ public class User {
     @Override
     public String toString() {
         return super.toString();
+    }
+
+    protected User() {
+    }
+
+    public User(String nickName, String loginId, String password) {
+        this.nickName = nickName;
+        this.loginId = loginId;
+        this.password = password;
+        this.role = Role.USER; //default값
+        this.bigThreePower = new bigThreePower(0,0,0); //default값
+    }
+    public User(String loginId, String password) {
+        this.loginId = loginId;
+        this.password = password;
     }
 }

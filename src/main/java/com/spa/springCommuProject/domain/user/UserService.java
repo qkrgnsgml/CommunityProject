@@ -36,4 +36,12 @@ public class UserService {
     public User findOne(Long userId) {
         return userRepository.findOne(userId);
     }
+
+    public User login(String loginId, String password){
+        /**
+         * return null 이면 로그인 실패
+         */
+        return userRepository.findByLoginId(loginId).filter(m->m.getPassword().equals(password))
+                .orElse(null);
+    }
 }

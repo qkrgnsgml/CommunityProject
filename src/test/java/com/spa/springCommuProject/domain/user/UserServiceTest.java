@@ -20,7 +20,6 @@ class UserServiceTest {
     public void 회원가입() throws Exception{
         //given
         User user = new User();
-        user.setNickName("박훈희");
 
         //when
         Long saveId = userService.join(user);
