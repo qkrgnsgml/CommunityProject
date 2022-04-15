@@ -17,15 +17,18 @@ public class UserService {
 
     @Transactional
     public Long join(User user){
-        validateDuplicateUser(user); //중복 회원 검증
+        validateDuplicateUser(user); //중복 닉네임, 아이디 검증
         userRepository.save(user);
         return user.getId();
     }
 
     private void validateDuplicateUser(User user) {
-        List<User> findUsers = userRepository.finByNickName(user.getNickName());
-        if(!findUsers.isEmpty()){
+        List<User> findUserByNickName = userRepository.finByNickName(user.getNickName());
+        if(!findUserByNickName.isEmpty()){
             throw new IllegalStateException("이미 존재하는 닉네임입니다.");
+        }
+        if(userRepository.findByLoginId(user.getLoginId()).isPresent()){
+            throw new IllegalStateException("이미 존재하는 아이디입니다.");
         }
     }
 

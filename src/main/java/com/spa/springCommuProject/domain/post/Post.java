@@ -19,6 +19,11 @@ public class Post {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public void createPost(User user) {
+        this.user = user;
+        //user.getPosts().add(this); //연관관계
+    }
+
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
@@ -27,4 +32,6 @@ public class Post {
 
     private Boolean available;
     private int view;
+
+
 }

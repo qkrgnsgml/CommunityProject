@@ -30,13 +30,26 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public String join(@Valid UserJoinDTO userJoinDTO){
-        User user = new User(userJoinDTO.getNickName(),userJoinDTO.getLoginId(),
-                userJoinDTO.getPassword());
-        log.info("join nickName={}",user.getNickName());
-        log.info("join username={}",user.getLoginId());
-        log.info("join userpassword={}",user.getPassword());
+    public String join(@Valid UserJoinDTO userJoinDTO, BindingResult
+            bindingResult, HttpServletRequest request){
+
+        if (bindingResult.hasErrors()) {
+            bindingResult.reject("joinFail", "잘못된 정보를 입력했습니다.");
+            log.info("bindingError");
+            return "/user/joinForm";
+        } //추가
+
+        User user = new User(userJoinDTO.getNickName(),userJoinDTO.getLoginId(), userJoinDTO.getPassword());
+        log.info("join user={}",user);
         userService.join(user);
+
+        //세션 생성
+        HttpSession session = request.getSession();
+        //세션에 가입 회원 정보 보관
+        session.setAttribute("loginUser", user);
+
+        //userService.login(userJoinDTO.getLoginId(), userJoinDTO.getPassword());
+        //실패
         return "redirect:/";
     }
 
@@ -51,7 +64,8 @@ public class UserController {
             bindingResult, HttpServletRequest request){
 
         if (bindingResult.hasErrors()) {
-            bindingResult.reject("loginFail", "잘못된 정보가 들어왔습니다.");
+            bindingResult.reject("loginFail", "잘못된 정보를 입력했습니다.");
+            log.info("bindingError");
             return "/user/loginForm";
         } //폼에 잘못된 정보 들어왔을때
 
@@ -59,7 +73,7 @@ public class UserController {
 
         if (loginUser == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
-            return "user/loginForm";
+            return "/user/loginForm";
         }
         log.info("login username={}",loginUser.getLoginId());
         log.info("login userpassword={}",loginUser.getPassword());
@@ -72,13 +86,14 @@ public class UserController {
         return "redirect:/";
     }
 
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public String logout(HttpServletRequest request) {
         //세션을 삭제한다.
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
         }
+        log.info("logout");
         return "redirect:/";
     }
 }

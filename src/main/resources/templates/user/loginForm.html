@@ -7,9 +7,20 @@
 <body>
 <form th:action th:object="${userLoginDTO}" method="post">
     <div>
-        <input type="text" th:field="*{loginId}" placeholder="아이디">
-        <input type="text" th:field="*{password}" placeholder="패스워드">
-        <button type="submit"> 로그인 </button>
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">글로벌 오류 메시지</p>
+        </div>
+        <div>
+            <input type="text" th:field="*{loginId}" placeholder="아이디">
+            <div th:errors="*{loginId}" />
+        </div>
+        <div>
+            <input type="password" th:field="*{password}" placeholder="패스워드">
+            <div th:errors="*{password}" />
+        </div>
+        <div>
+            <button type="submit"> 로그인 </button>
+        </div>
     </div>
     <a href="/user">회원가입</a>
 </form>

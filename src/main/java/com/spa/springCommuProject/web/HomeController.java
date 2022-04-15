@@ -7,8 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 @Controller
 @Slf4j
@@ -23,8 +21,8 @@ public class HomeController {
             return "home";
         }
 
-        //세션이 유지되면 로그인으로 이동
-        model.addAttribute("member", loginUser);
+        //세션이 유지되면 모델에 값 넣고 로그인으로 이동
+        model.addAttribute("user", loginUser);
 
         return "loginHome";
     }

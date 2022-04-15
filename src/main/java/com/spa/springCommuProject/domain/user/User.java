@@ -2,7 +2,6 @@ package com.spa.springCommuProject.domain.user;
 
 import com.spa.springCommuProject.domain.post.Post;
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -30,8 +29,9 @@ public class User {
     @Embedded
     private bigThreePower bigThreePower;
 
-    @OneToMany(mappedBy = "user")
-    private List<Post> posts = new ArrayList<>();
+    //@OneToMany(mappedBy = "user")
+    //private List<Post> posts = new ArrayList<>();
+
 
     @Override
     public String toString() {
@@ -48,8 +48,5 @@ public class User {
         this.role = Role.USER; //default값
         this.bigThreePower = new bigThreePower(0,0,0); //default값
     }
-    public User(String loginId, String password) {
-        this.loginId = loginId;
-        this.password = password;
-    }
+
 }
