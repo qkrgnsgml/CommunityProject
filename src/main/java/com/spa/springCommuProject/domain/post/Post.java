@@ -7,6 +7,9 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
+@Inheritance(strategy = InheritanceType.JOINED)
+@Entity
+@DiscriminatorColumn // 하위 테이블의 구분 컬럼 생성(default = DTYPE)
 public class Post {
 
     @Id

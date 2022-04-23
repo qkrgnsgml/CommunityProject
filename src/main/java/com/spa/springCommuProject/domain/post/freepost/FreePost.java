@@ -8,6 +8,7 @@ import javax.persistence.*;
 
 
 @Getter
+@Entity
 public class FreePost extends Post {
 
     public FreePost() {
