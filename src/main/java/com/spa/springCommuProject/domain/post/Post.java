@@ -6,7 +6,6 @@ import lombok.Getter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
 @Getter
 public class Post {
 
@@ -22,6 +21,18 @@ public class Post {
     public void createPost(User user) {
         this.user = user;
         //user.getPosts().add(this); //연관관계
+    }
+
+    public Post() {
+    }
+
+    public Post(User user, String title, String content) {
+        this.available = true;
+        this.createdDate = LocalDateTime.now();
+        this.view = 0;
+        this.user = user;
+        this.title = title;
+        this.content = content;
     }
 
     private LocalDateTime createdDate;
