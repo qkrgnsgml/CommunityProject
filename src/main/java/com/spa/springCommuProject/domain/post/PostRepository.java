@@ -1,11 +1,30 @@
 package com.spa.springCommuProject.domain.post;
 
 
-public interface PostRepository {
 
-    void save(Post post);
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
-    public Post findOnePost(Long id);
+import javax.persistence.EntityManager;
+import java.util.List;
+
+@Repository
+@RequiredArgsConstructor
+public class PostRepository {
+
+    private final EntityManager em;
+
+    public void save(Post post) {
+        em.persist(post);
+    }
+
+    public Post findOnePost(Long id) {
+        return em.find(Post.class, id);
+    }
+
+    public List<Post> findAll(){
+        return em.createQuery("select p from Post p", Post.class).getResultList();
+    }
 
 //    public List<User> findAll(){
 //        return em.createQuery("select u from User u", User.class).getResultList();

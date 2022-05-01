@@ -1,12 +1,31 @@
 package com.spa.springCommuProject.domain.post;
 
 
-import com.spa.springCommuProject.domain.post.freepost.FreePost;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-public interface PostService {
+import java.util.List;
 
-    Long join(Post post);
+@Service
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
+public class PostService {
 
-    Post findOnePost(Long postId);
+    private final PostRepository postRepository;
+
+    @Transactional
+    public Long savePost(Post post){
+        postRepository.save(post);
+        return post.getId();
+    }
+
+    public Post findOnePost(Long postId){
+        return postRepository.findOnePost(postId);
+    }
+
+    public List<Post> findPosts(){
+        return postRepository.findAll();
+    }
 
 }

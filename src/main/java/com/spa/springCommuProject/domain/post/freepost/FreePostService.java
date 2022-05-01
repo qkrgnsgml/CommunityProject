@@ -9,19 +9,18 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class FreePostService implements PostService {
+public class FreePostService {
 
     private final FreePostRepository freePostRepository;
 
 
-    @Override
+
     public Long join(Post freePost) {
         freePostRepository.save(freePost);
         return freePost.getId();
     }
 
 
-    @Override
     public Post findOnePost(Long postId) {
         return freePostRepository.findOnePost(postId);
     }

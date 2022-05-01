@@ -1,4 +1,4 @@
-package com.spa.springCommuProject.domain.post.freepost;
+package com.spa.springCommuProject.domain.post;
 
 import com.spa.springCommuProject.domain.post.Post;
 import com.spa.springCommuProject.domain.user.User;

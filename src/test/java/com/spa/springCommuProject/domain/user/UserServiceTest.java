@@ -17,9 +17,11 @@ class UserServiceTest {
     @Autowired UserRepository userRepository;
 
     @Test
+    @Rollback(value = false)
     public void 회원가입() throws Exception{
         //given
-        User user = new User();
+        User user = new User("park", "userId", "userPW");
+
 
         //when
         Long saveId = userService.join(user);
