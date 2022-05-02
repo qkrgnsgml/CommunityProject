@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div>
+    <form th:action th:object="${freePostDTO}" method="post">
+        <div>
+            <label>제목</label>
+            <input type="text" th:field="*{title}"
+                   placeholder="제목을 입력하세요">
+        </div>
+        <div>
+            <label th:for="price">내용</label>
+            <textarea th:field="*{content}"></textarea>
+<!--            <input type="number" th:field="*{price}" class="form-control"-->
+<!--                   placeholder="s을 입력하세요">-->
+        <button type="submit">Submit</button>
+        </div>
+    </form>
+    <br/>
+</div> <!-- /container -->
+</body>
+</html>

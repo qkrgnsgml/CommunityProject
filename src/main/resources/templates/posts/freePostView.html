@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:object="${freePostDTO}">
+    <table>
+        <tr>
+            <td>제목</td>
+            <td th:text="*{title}"></td>
+        </tr>
+        <tr>
+            <td>내용</td>
+            <td th:text="*{content}"></td>
+        </tr>
+    </table>
+    <br/>
+</div> <!-- /container -->
+</body>
+</html>
