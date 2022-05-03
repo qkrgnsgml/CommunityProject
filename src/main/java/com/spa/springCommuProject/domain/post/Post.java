@@ -47,5 +47,19 @@ public class Post {
     private Boolean available;
     private int view;
 
+    public void update(String title, String content){
+        this.title = title;
+        this.content = content;
+        this.modifiedDate = LocalDateTime.now();
+    }
+
+    public void delete(){
+        this.available = false;
+    }
+
+    public void viewIncrease(){
+        this.view++;
+    }
+
 
 }

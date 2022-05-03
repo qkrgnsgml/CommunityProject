@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -24,4 +26,6 @@ public class FreePostService {
     public Post findOnePost(Long postId) {
         return freePostRepository.findOnePost(postId);
     }
+
+
 }

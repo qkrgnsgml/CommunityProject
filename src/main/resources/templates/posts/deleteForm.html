@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div>
+    <form th:action method="post">
+
+        <table>
+            <tr th:rowspan="2">
+                <td>
+                    정말 삭제하시겠습니까?
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit">Submit</button>
+                </td>
+                <td>
+                    <a th:href="@{/freepost/{id} (id=${postId})}">뒤로</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <br/>
+</div> <!-- /container -->
+</body>
+</html>

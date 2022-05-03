@@ -23,41 +23,80 @@ public class FreePostController {
     private final PostService postService;
 
     @GetMapping("/freeposts")
-    public String freePostList(Model model){
+    public String freePostList(Model model) {
         List<Post> posts = postService.findPosts();
         model.addAttribute("posts", posts);
-        return "posts/FreePostList";
+        return "posts/freePostList";
     }
 
     @GetMapping("/freepost")
-    public String createForm(FreePostDTO freePostDTO){
+    public String createForm(FreePostDTO freePostDTO) {
         log.info("createFreePostForm");
-        return "posts/createFreePostForm";
+        return "posts/freePostForm";
     }
 
     @PostMapping("/freepost")
     public String create(@SessionAttribute(name = "loginUser", required = false) User loginUser,
-                         FreePostDTO freePostDTO){
+                         FreePostDTO freePostDTO) {
         log.info("createFreePost");
 
         FreePost freePost = new FreePost(loginUser, freePostDTO.getTitle(), freePostDTO.getContent());
         postService.savePost(freePost);
 
         Long id = freePost.getId();
-        return "redirect:/freepost/"+id;
+        return "redirect:/freepost/" + id;
     }
 
     @GetMapping("/freepost/{postId}")
-    public String postView(@PathVariable Long postId, Model model){
+    public String postView(@PathVariable Long postId, Model model) {
         log.info("postView");
 
+        postService.viewIncrease(postId); //추가
         Post post = postService.findOnePost(postId);
-        FreePostDTO freePostDTO = new FreePostDTO();
-        freePostDTO.setContent(post.getContent());
-        freePostDTO.setTitle(post.getTitle());
+        FreePostDTO freePostDTO = new FreePostDTO(post.getTitle(), post.getContent());
 
-        model.addAttribute("freePostDTO",freePostDTO);
+        model.addAttribute("freePostDTO", freePostDTO);
+        model.addAttribute("postId", post.getId());
         return "posts/freePostView";
     }
+
+    @GetMapping("/freepost/{postId}/edit")
+    public String editForm(@PathVariable Long postId, Model model) {
+        log.info("editForm");
+
+        Post post = postService.findOnePost(postId);
+        FreePostDTO freePostDTO = new FreePostDTO(post.getTitle(), post.getContent());
+
+        model.addAttribute("freePostDTO", freePostDTO);
+        return "posts/FreePostForm";
+    }
+
+    @PostMapping("/freepost/{postId}/edit")
+    public String edit(@PathVariable Long postId, FreePostDTO freePostDTO) {
+        log.info("edit");
+
+        postService.updateFreePost(postId, freePostDTO.getTitle(), freePostDTO.getContent());
+
+        return "redirect:/freepost/" + postId;
+    }
+
+    @GetMapping("/freepost/{postId}/delete")
+    public String deleteForm(@PathVariable Long postId, Model model) {
+        log.info("deleteForm");
+
+        model.addAttribute("postId",postId);
+
+        return "posts/deleteForm";
+    }
+
+    @PostMapping("/freepost/{postId}/delete")
+    public String delete(@PathVariable Long postId) {
+        log.info("delete");
+
+        postService.deleteFreePost(postId);
+
+        return "redirect:/freeposts";
+    }
+
 
 }

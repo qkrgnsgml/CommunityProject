@@ -18,4 +18,6 @@ public class FreePost extends Post {
     public FreePost(User user, String title, String content) {
         super(user, title, content);
     }
+
+
 }
