@@ -23,8 +23,10 @@ public class FreePostController {
     private final PostService postService;
 
     @GetMapping("/freeposts")
-    public String freePostList(Model model) {
+    public String freePostList(@SessionAttribute(name = "loginUser", required = false) User loginUser,
+            Model model) {
         List<Post> posts = postService.findPosts();
+        model.addAttribute("link", loginUser==null ? "login" : "freepost");
         model.addAttribute("posts", posts);
         return "posts/freePostList";
     }
@@ -48,13 +50,16 @@ public class FreePostController {
     }
 
     @GetMapping("/freepost/{postId}")
-    public String postView(@PathVariable Long postId, Model model) {
+    public String postView(@SessionAttribute(name = "loginUser", required = false) User loginUser,
+            @PathVariable Long postId, Model model) {
         log.info("postView");
 
         postService.viewIncrease(postId); //추가
         Post post = postService.findOnePost(postId);
         FreePostDTO freePostDTO = new FreePostDTO(post.getTitle(), post.getContent());
 
+        model.addAttribute("loginUser", loginUser==null ? null : loginUser.getId());
+        model.addAttribute("postUser",post.getUser().getId());
         model.addAttribute("freePostDTO", freePostDTO);
         model.addAttribute("postId", post.getId());
         return "posts/freePostView";

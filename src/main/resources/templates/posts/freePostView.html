@@ -14,8 +14,8 @@
     </table>
     <br/>
     <a href="/freeposts">목록</a>
-    <a th:href="@{/freepost/{id}/edit (id=${postId})}">수정</a>
-    <a th:href="@{/freepost/{id}/delete (id=${postId})}">삭제</a>
+    <a th:if="${postUser} == ${loginUser}" th:href="@{/freepost/{id}/edit (id=${postId})}">수정</a>
+    <a th:if="${postUser} == ${loginUser}" th:href="@{/freepost/{id}/delete (id=${postId})}">삭제</a>
 </div> <!-- /container -->
 </body>
 </html>
