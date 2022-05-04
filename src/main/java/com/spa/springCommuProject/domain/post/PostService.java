@@ -24,7 +24,11 @@ public class PostService {
         return postRepository.findOnePost(postId);
     }
 
-    public List<Post> findPosts(){
+    public List<Post> findAvailablePosts(){
+        return postRepository.findAvailableAll();
+    }
+
+    public List<Post> findAllPosts(){
         return postRepository.findAll();
     }
 

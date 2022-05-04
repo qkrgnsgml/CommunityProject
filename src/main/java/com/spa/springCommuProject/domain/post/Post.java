@@ -5,6 +5,7 @@ import lombok.Getter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -31,7 +32,8 @@ public class Post {
 
     public Post(User user, String title, String content) {
         this.available = true;
-        this.createdDate = LocalDateTime.now();
+        String nowTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        this.createdDate = LocalDateTime.parse(nowTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         this.view = 0;
         this.user = user;
         this.title = title;
@@ -50,7 +52,8 @@ public class Post {
     public void update(String title, String content){
         this.title = title;
         this.content = content;
-        this.modifiedDate = LocalDateTime.now();
+        String nowTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        this.modifiedDate = LocalDateTime.parse(nowTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
     public void delete(){

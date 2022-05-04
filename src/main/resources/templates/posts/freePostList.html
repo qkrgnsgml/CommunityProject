@@ -16,7 +16,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:if="${post.available} == true" th:each="post : ${posts}">
+<!--            th:if="${post.available} == true"-->
+            <tr th:each="post : ${posts}">
                 <td th:text="${post.id}"></td>
                 <td><a th:href="@{/freepost/{id} (id=${post.id})}">[[${post.title}]]</a></td>
                 <td th:text="${post.user.nickName}"></td>

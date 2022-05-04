@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
@@ -20,6 +21,10 @@ public class PostRepository {
 
     public Post findOnePost(Long id) {
         return em.find(Post.class, id);
+    }
+
+    public List<Post> findAvailableAll(){
+        return em.createQuery("select p from Post p", Post.class).getResultList().stream().filter(x->x.getAvailable()==true).collect(Collectors.toList());
     }
 
     public List<Post> findAll(){
