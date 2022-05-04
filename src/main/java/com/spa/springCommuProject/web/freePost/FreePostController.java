@@ -8,11 +8,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -39,8 +41,14 @@ public class FreePostController {
 
     @PostMapping("/freepost")
     public String create(@SessionAttribute(name = "loginUser", required = false) User loginUser,
-                         FreePostDTO freePostDTO) {
+                         @Valid FreePostDTO freePostDTO, BindingResult bindingResult) {
         log.info("createFreePost");
+
+        if (bindingResult.hasErrors()) {
+            bindingResult.reject("PostCreateFail", "잘못된 정보를 입력했습니다.");
+            log.info("bindingError");
+            return "/posts/freePostForm";
+        } //추가
 
         FreePost freePost = new FreePost(loginUser, freePostDTO.getTitle(), freePostDTO.getContent());
         postService.savePost(freePost);
@@ -77,8 +85,15 @@ public class FreePostController {
     }
 
     @PostMapping("/freepost/{postId}/edit")
-    public String edit(@PathVariable Long postId, FreePostDTO freePostDTO) {
+    public String edit(@PathVariable Long postId,
+                       @Valid FreePostDTO freePostDTO, BindingResult bindingResult) {
         log.info("edit");
+
+        if (bindingResult.hasErrors()) {
+            bindingResult.reject("updateFail", "잘못된 정보를 입력했습니다.");
+            log.info("bindingError");
+            return "/posts/freePostForm";
+        } //추가
 
         postService.updateFreePost(postId, freePostDTO.getTitle(), freePostDTO.getContent());
 
