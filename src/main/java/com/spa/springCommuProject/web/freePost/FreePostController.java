@@ -64,10 +64,9 @@ public class FreePostController {
 
         postService.viewIncrease(postId); //추가
         Post post = postService.findOnePost(postId);
-        FreePostDTO freePostDTO = new FreePostDTO(post.getTitle(), post.getContent());
+        FreePostDTO freePostDTO = new FreePostDTO(post.getTitle(), post.getContent(), post.getCreatedDate(),post.getUser());
 
-        model.addAttribute("loginUser", loginUser==null ? null : loginUser.getId());
-        model.addAttribute("postUser",post.getUser().getId());
+        model.addAttribute("loginUserId", loginUser==null ? null : loginUser.getId());
         model.addAttribute("freePostDTO", freePostDTO);
         model.addAttribute("postId", post.getId());
         return "posts/freePostView";

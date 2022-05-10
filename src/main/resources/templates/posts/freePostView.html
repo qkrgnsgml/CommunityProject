@@ -1,21 +1,29 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
+<header th:replace="~{fragment/header :: menubar}"></header>
 <div th:object="${freePostDTO}">
-    <table>
+    <h3 style="text-align: center;">게시글 보기 </h3>
+    <table style="text-align: center;width:50%; margin: auto;" border="1">
         <tr>
-            <td>제목</td>
-            <td th:text="*{title}"></td>
+            <td colspan="2" th:text="*{title}"></td>
         </tr>
         <tr>
-            <td>내용</td>
-            <td th:text="*{content}"></td>
+            <td th:text="*{user.nickName}"></td>
+            <td th:text="*{createdDate}"></td>
+        </tr>
+        <tr>
+            <td height="200em" colspan="2" th:text="*{content}"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><a href="/freeposts">목록</a></td>
         </tr>
     </table>
     <br/>
-    <a href="/freeposts">목록</a>
-    <a th:if="${postUser} == ${loginUser}" th:href="@{/freepost/{id}/edit (id=${postId})}">수정</a>
-    <a th:if="${postUser} == ${loginUser}" th:href="@{/freepost/{id}/delete (id=${postId})}">삭제</a>
+    <div style="text-align: center; margin: auto;">
+        <a th:if="${freePostDTO.user.id} == ${loginUserId}" th:href="@{/freepost/{id}/edit (id=${postId})}">수정</a>
+        <a th:if="${freePostDTO.user.id} == ${loginUserId}" th:href="@{/freepost/{id}/delete (id=${postId})}">삭제</a>
+    </div>
 </div> <!-- /container -->
 </body>
 </html>

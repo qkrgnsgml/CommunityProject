@@ -1,27 +1,29 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<div>
-    <form th:action th:object="${freePostDTO}" method="post">
-        <div th:if="${#fields.hasGlobalErrors()}">
-            <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">글로벌 오류 메시지</p>
-        </div>
-        <div>
-            <label>제목</label>
-            <input type="text" th:field="*{title}"
-                   placeholder="제목을 입력하세요">
-            <div th:errors="*{title}" />
-        </div>
-        <div>
-            <label th:for="price">내용</label>
-            <textarea th:field="*{content}"></textarea>
-            <div th:errors="*{content}" />
-<!--            <input type="number" th:field="*{price}" class="form-control"-->
-<!--                   placeholder="s을 입력하세요">-->
-        <button type="submit">Submit</button>
-        </div>
-    </form>
-    <br/>
-</div> <!-- /container -->
+<header th:replace="~{fragment/header :: menubar}"></header>
+<form th:action th:object="${freePostDTO}" method="post">
+    <h3 style="text-align: center;">자유게시판 글쓰기화면</h3>
+    <table style="text-align: center;width:60%; margin: auto;" border="1">
+        <tr th:if="${#fields.hasErrors()}">
+            <td th:errors="*{title}"/>
+            <td th:errors="*{content}"/>
+        </tr>
+        <tr>
+            <td style="width: 20%">제목</td>
+            <td style="width: 50%"><input type="text" th:field="*{title}" placeholder="제목" required></td>
+        </tr>
+        <tr>
+            <td>내용</td>
+            <td><textarea rows="20" th:field="*{content}" placeholder="글 내용" required></textarea></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button type="submit">글쓰기</button>
+            </td>
+        </tr>
+    </table>
+</form>
+
 </body>
 </html>

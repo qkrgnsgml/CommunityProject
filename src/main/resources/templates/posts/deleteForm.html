@@ -1,17 +1,18 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
+<header th:replace="~{fragment/header :: menubar}"></header>
 <div>
     <form th:action method="post">
-
-        <table>
-            <tr th:rowspan="2">
-                <td>
+        <h3 style="text-align: center;">글삭제 화면</h3>
+        <table style="text-align: center;width:40%; margin: auto;" border="1">
+            <tr>
+                <td th:colspan="2">
                     정말 삭제하시겠습니까?
                 </td>
             </tr>
             <tr>
-                <td>
+                <td style="width:50%">
                     <button type="submit">Submit</button>
                 </td>
                 <td>
