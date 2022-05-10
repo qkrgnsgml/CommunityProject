@@ -5,28 +5,33 @@
     <title>Title</title>
 </head>
 <body>
-
+<header th:replace="~{fragment/header :: menubar}"></header>
+<h3 style="text-align: center;">회원가입화면</h3>
 <form th:action th:object="${userJoinDTO}" method="post">
-    <div>
-        <div th:if="${#fields.hasGlobalErrors()}">
-            <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">글로벌 오류 메시지</p>
-        </div>
-        <div>
-            <input type="text" th:field="*{loginId}" placeholder="아이디(5~12자)">
-            <div th:errors="*{loginId}" />
-        </div>
-        <div>
-            <input type="password" th:field="*{password}" placeholder="패스워드(8~15자)">
-            <div th:errors="*{password}" />
-        </div>
-        <div>
-            <input type="text" th:field="*{nickName}" placeholder="닉네임(2~10자)">
-            <div th:errors="*{nickName}" />
-        </div>
-        <div>
-            <button type="submit"> 회원가입 </button>
-        </div>
-    </div>
+    <table style="text-align: center;width:60%; margin: auto;" border="1">
+        <tr th:if="${#fields.hasErrors()}">
+            <td th:errors="*{loginId}" />
+            <td th:errors="*{password}" />
+            <td th:errors="*{nickName}" />
+        </tr>
+        <tr>
+            <td style="width: 30%">아이디</td>
+            <td th:colspan="2" style="width: 50%"><input type="text" th:field="*{loginId}" placeholder="아이디(5~12자)" size="12" required></td>
+
+        </tr>
+        <tr>
+            <td>비밀번호</td>
+            <td th:colspan="2"><input type="password" th:field="*{password}" placeholder="패스워드(8~15자)" size="14" required></td>
+
+        </tr>
+        <tr>
+            <td>닉네임</td>
+            <td th:colspan="2"><input type="text" th:field="*{nickName}" placeholder="닉네임(2~10자)" size="15" required></td>
+        </tr>
+        <tr>
+            <td colspan="3"><button type="submit">회원가입</button></td>
+        </tr>
+    </table>
 </form>
 </body>
 </html>

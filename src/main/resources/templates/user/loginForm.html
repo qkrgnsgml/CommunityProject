@@ -5,24 +5,28 @@
     <title>Title</title>
 </head>
 <body>
+<header th:replace="~{fragment/header :: menubar}"></header>
+<h3 style="text-align: center;">로그인화면</h3>
 <form th:action th:object="${userLoginDTO}" method="post">
-    <div>
-        <div th:if="${#fields.hasGlobalErrors()}">
-            <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">글로벌 오류 메시지</p>
-        </div>
-        <div>
-            <input type="text" th:field="*{loginId}" placeholder="아이디">
-            <div th:errors="*{loginId}" />
-        </div>
-        <div>
-            <input type="password" th:field="*{password}" placeholder="패스워드">
-            <div th:errors="*{password}" />
-        </div>
-        <div>
-            <button type="submit"> 로그인 </button>
-        </div>
-    </div>
-    <a href="/user">회원가입</a>
+    <table style="text-align: center; width:30%; margin: auto;" border="1">
+        <tr th:if="${#fields.hasGlobalErrors()}">
+            <td th:colspan="2" th:each="err : ${#fields.globalErrors()}" th:text="${err}">글로벌 오류 메시지</td>
+        </tr>
+        <tr>
+            <td>아이디</td>
+            <td><input type="text" th:field="*{loginId}" placeholder="아이디" required></td>
+            <td th:errors="*{loginId}"/>
+        </tr>
+        <tr>
+            <td>비밀번호</td>
+            <td><input type="password" th:field="*{password}" placeholder="패스워드" required></td>
+            <td th:errors="*{password}"/>
+        </tr>
+        <tr>
+            <td><a href="/user">회원가입</a></td>
+            <td><input type="submit" value="로그인"></td>
+        </tr>
+    </table>
 </form>
 </body>
 </html>
