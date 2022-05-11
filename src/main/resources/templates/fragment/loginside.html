@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head xmlns:th="http://www.thymeleaf.org">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<side th:fragment="sidebar(nickName)">
+    <div>
+        <h4 th:text="|로그인: ${nickName} 님 어서오세요|"></h4>
+    </div>
+    <div>
+        <button onclick="location.href='/logout';">로그아웃</button>
+    </div>
+    <div>
+        <h3>랭킹</h3>
+    </div>
+</side>
+</body>
+</html>
