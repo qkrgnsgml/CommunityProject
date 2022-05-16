@@ -12,6 +12,7 @@ public class bigThreePower {
     private int squat;
     private int bench;
     private int dead;
+    private int sum;
 
     protected bigThreePower() {
     }
@@ -20,5 +21,6 @@ public class bigThreePower {
         this.squat = squat;
         this.bench = bench;
         this.dead = dead;
+        this.sum = squat + bench + dead;
     }
 }
