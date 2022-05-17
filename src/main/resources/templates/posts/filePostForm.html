@@ -6,12 +6,8 @@
 <body>
 <header th:replace="~{fragment/header :: menubar}"></header>
 
-<form th:action method="post" enctype="multipart/form-data">
+<form th:action th:object="${freePostDTO}" method="post" enctype="multipart/form-data">
     <h3 style="text-align: center;">사진게시판 업로드 화면</h3>
-    <ul>
-        <li>상품명 <input type="text" name="itemName"></li>
-        <li>파일<input type="file" name="file"></li>
-    </ul>
 
     <table style="text-align: center;width:60%; margin: auto;" border="1">
         <tr th:if="${#fields.hasErrors()}">

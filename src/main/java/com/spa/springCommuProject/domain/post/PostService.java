@@ -28,6 +28,8 @@ public class PostService {
         return postRepository.findAvailableAll();
     }
 
+
+
     public List<Post> findAllPosts(){
         return postRepository.findAll();
     }

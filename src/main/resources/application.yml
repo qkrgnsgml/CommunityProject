@@ -4,6 +4,10 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
+  servlet:
+    multipart:
+      maxFileSize: 10MB
+      maxRequestSize: 20MB
 
   jpa:
     hibernate:
@@ -21,3 +25,6 @@ server:
     session:
       timeout: 30m
       tracking-modes: cookie
+
+file:
+  dir: C:/Users/spa89/Downloads/develop/springCommuProject/file/
