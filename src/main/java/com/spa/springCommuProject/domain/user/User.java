@@ -1,11 +1,8 @@
 package com.spa.springCommuProject.domain.user;
 
-import com.spa.springCommuProject.domain.post.Post;
 import lombok.Getter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -37,16 +34,26 @@ public class User {
     public String toString() {
         return super.toString();
     }
-
+    private Boolean available;
     protected User() {
     }
 
     public User(String nickName, String loginId, String password) {
+        this.available = true;
         this.nickName = nickName;
         this.loginId = loginId;
         this.password = password;
         this.role = Role.USER; //default값
         this.bigThreePower = new bigThreePower(0,0,0); //default값
+    }
+
+    public void update(String nickName, String password){
+        this.nickName = nickName;
+        this.password = password;
+    }
+
+    public void delete(){
+        this.available = false;
     }
 
 }

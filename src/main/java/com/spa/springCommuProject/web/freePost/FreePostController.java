@@ -74,24 +74,24 @@ public class FreePostController {
 
     @GetMapping("/freepost/{postId}/edit")
     public String editForm(@PathVariable Long postId, Model model) {
-        log.info("editForm");
+        log.info("freePosteditForm");
 
         Post post = postService.findOnePost(postId);
         FreePostDTO freePostDTO = new FreePostDTO(post.getTitle(), post.getContent());
 
         model.addAttribute("freePostDTO", freePostDTO);
-        return "posts/FreePostForm";
+        return "posts/freePostUpdateForm";
     }
 
     @PostMapping("/freepost/{postId}/edit")
     public String edit(@PathVariable Long postId,
                        @Valid FreePostDTO freePostDTO, BindingResult bindingResult) {
-        log.info("edit");
+        log.info("freePostedit");
 
         if (bindingResult.hasErrors()) {
             bindingResult.reject("updateFail", "잘못된 정보를 입력했습니다.");
             log.info("bindingError");
-            return "/posts/freePostForm";
+            return "/posts/freePostUpdateForm";
         } //추가
 
         postService.updateFreePost(postId, freePostDTO.getTitle(), freePostDTO.getContent());
@@ -101,7 +101,7 @@ public class FreePostController {
 
     @GetMapping("/freepost/{postId}/delete")
     public String deleteForm(@PathVariable Long postId, Model model) {
-        log.info("deleteForm");
+        log.info("freePostDeleteForm");
 
         model.addAttribute("postId",postId);
 
@@ -110,7 +110,7 @@ public class FreePostController {
 
     @PostMapping("/freepost/{postId}/delete")
     public String delete(@PathVariable Long postId) {
-        log.info("delete");
+        log.info("freePostDelete");
 
         postService.deleteFreePost(postId);
 

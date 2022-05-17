@@ -1,7 +1,6 @@
 package com.spa.springCommuProject.domain.user;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,5 +45,16 @@ public class UserService {
          */
         return userRepository.findByLoginId(loginId).filter(m->m.getPassword().equals(password))
                 .orElse(null);
+    }
+
+    @Transactional
+    public void updateUser(Long userId, String nickName, String password){
+        User findUser = userRepository.findOne(userId);
+        findUser.update(nickName, password);
+    }
+    @Transactional
+    public void deleteUser(Long userId){
+        User findUser = userRepository.findOne(userId);
+        findUser.delete();
     }
 }

@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<header th:replace="~{fragment/header :: menubar}"></header>
+<div th:object="${userUpdateDTO}">
+    <h3 style="text-align: center;">내정보 보기 </h3>
+    <table style="text-align: center;width:50%; margin: auto;" border="1">
+        <tr>
+            <td>닉네임</td>
+            <td th:text="*{nickName}"></td>
+        </tr>
+        <tr>
+            <td>아이디</td>
+            <td th:text="*{loginId}"></td>
+        </tr>
+        <tr>
+            <td>비밀번호</td>
+            <td th:text="*{password}"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><a href="/">메인</a></td>
+        </tr>
+    </table>
+    <br/>
+    <div style="text-align: center; margin: auto;">
+        <a th:href="@{/user/{id}/edit (id=${userId})}">수정</a>
+        <a th:href="@{/user/{id}/delete (id=${userId})}">탈퇴</a>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<header th:replace="~{fragment/header :: menubar}"></header>
+<div>
+    <form th:action method="post">
+        <h3 style="text-align: center;">회원탈퇴 화면</h3>
+        <table style="text-align: center;width:40%; margin: auto;" border="1">
+            <tr>
+                <td th:colspan="2">
+                    정말 탈퇴하시겠습니까?
+                </td>
+            </tr>
+            <tr>
+                <td style="width:50%">
+                    <button type="submit">탈퇴</button>
+                </td>
+                <td>
+                    <a th:href="@{/user/{id} (id=${userId})}">뒤로</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <br/>
+</div> <!-- /container -->
+</body>
+</html>

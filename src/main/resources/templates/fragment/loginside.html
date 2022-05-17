@@ -5,12 +5,13 @@
     <title>Title</title>
 </head>
 <body>
-<side th:fragment="sidebar(nickName)">
+<side th:fragment="sidebar(nickName, id)">
     <div>
         <h4 th:text="|로그인: ${nickName} 님 어서오세요|"></h4>
     </div>
     <div>
         <button onclick="location.href='/logout';">로그아웃</button>
+        <a th:href="@{/user/{id} (id=${id})}">수정</a>
     </div>
     <div>
         <h3>랭킹</h3>

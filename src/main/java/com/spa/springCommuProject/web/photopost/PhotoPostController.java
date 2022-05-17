@@ -24,7 +24,7 @@ public class PhotoPostController {
     public String photoPostList(@SessionAttribute(name = "loginUser", required = false) User loginUser,
                                Model model) {
         List<Post> posts = postService.findAvailablePosts();
-        model.addAttribute("link", loginUser==null ? "login" : "freepost");
+        model.addAttribute("link", loginUser==null ? "login" : "photopost");
         model.addAttribute("posts", posts);
         return "posts/photoPostList";
     }

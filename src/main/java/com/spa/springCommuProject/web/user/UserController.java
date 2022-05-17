@@ -6,8 +6,10 @@ import com.spa.springCommuProject.domain.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -73,6 +75,10 @@ public class UserController {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
             return "/user/loginForm";
         }
+        if(loginUser.getAvailable()==false){
+            bindingResult.reject("loginFail", "탈퇴된 회원입니다.");
+            return "/user/loginForm";
+        }
         log.info("login username={}",loginUser.getLoginId());
         log.info("login userpassword={}",loginUser.getPassword());
 
@@ -94,4 +100,61 @@ public class UserController {
         log.info("logout");
         return "redirect:/";
     }
+
+    @GetMapping("/user/{userId}")
+    public String myView(@PathVariable Long userId, Model model) {
+        log.info("myView");
+
+        User findUser = userService.findOne(userId);
+        UserUpdateDTO userUpdateDTO = new UserUpdateDTO(findUser.getNickName(), findUser.getLoginId(), findUser.getPassword());
+
+        model.addAttribute("userUpdateDTO", userUpdateDTO);
+        model.addAttribute("userId", userId);
+        return "user/myView";
+    }
+
+    @GetMapping("/user/{userId}/edit")
+    public String editForm(@PathVariable Long userId, Model model) {
+        log.info("usereditForm");
+
+        User findUser = userService.findOne(userId);
+        UserUpdateDTO userUpdateDTO = new UserUpdateDTO(findUser.getNickName(), findUser.getLoginId(), findUser.getPassword());
+
+        model.addAttribute("userUpdateDTO", userUpdateDTO);
+        return "user/updateForm";
+    }
+
+    @PostMapping("/user/{userId}/edit")
+    public String edit(@PathVariable Long userId,
+                       @Valid UserUpdateDTO userUpdateDTO, BindingResult bindingResult) {
+        log.info("useredit");
+
+        if (bindingResult.hasErrors()) {
+            bindingResult.reject("updateFail", "잘못된 정보를 입력했습니다.");
+            log.info("bindingError");
+            return "/user/updateForm";
+        } //추가
+
+        userService.updateUser(userId, userUpdateDTO.getNickName(), userUpdateDTO.getPassword());
+
+        return "redirect:/user/" + userId;
+    }
+
+    @GetMapping("/user/{userId}/delete")
+    public String deleteForm(@PathVariable Long userId, Model model) {
+        log.info("userDeleteForm");
+
+        model.addAttribute("userId",userId);
+
+        return "user/deleteForm";
+    }
+
+    @PostMapping("/user/{userId}/delete")
+    public String delete(@PathVariable Long userId) {
+        log.info("userDelete");
+
+        userService.deleteUser(userId);
+        return "redirect:/logout";
+    }
+
 }
