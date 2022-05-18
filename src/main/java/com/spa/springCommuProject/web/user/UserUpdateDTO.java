@@ -13,7 +13,7 @@ public class UserUpdateDTO {
     private String nickName;
 
     @NotBlank(message = "아이디를 입력해주세요.")
-    @Size(min = 5, max = 12, message = "아이디는 5자 이상 12자 이하로 입력해주세요.")
+    @Size(min = 4, max = 12, message = "아이디는 4자 이상 12자 이하로 입력해주세요.")
     private String loginId;
 
     @NotBlank(message = "비밀번호를 입력해주세요.")

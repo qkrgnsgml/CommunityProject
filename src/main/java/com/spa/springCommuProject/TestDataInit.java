@@ -22,10 +22,10 @@ public class TestDataInit {
 
     @PostConstruct
     public void init() {
-        User user = new User("park","asdfg","123");
+        User user = new User("park","root","1234");
         userService.join(user);
-        PhotoPost photoPost = new PhotoPost(user, "title2", "content2");
-        FreePost post = new FreePost(user, "title1", "content1");
+        PhotoPost photoPost = new PhotoPost(user, "PhotoTitle", "PhotoContent");
+        FreePost post = new FreePost(user, "FreeTitle", "FreeContent");
         postService.savePost(post);
         postService.savePost(photoPost);
     }
