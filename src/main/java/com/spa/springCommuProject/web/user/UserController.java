@@ -121,6 +121,7 @@ public class UserController {
         UserUpdateDTO userUpdateDTO = new UserUpdateDTO(findUser.getNickName(), findUser.getLoginId(), findUser.getPassword());
 
         model.addAttribute("userUpdateDTO", userUpdateDTO);
+        model.addAttribute("userId", userId);
         return "user/updateForm";
     }
 

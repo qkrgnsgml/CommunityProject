@@ -79,6 +79,7 @@ public class FreePostController {
         Post post = postService.findOnePost(postId);
         FreePostDTO freePostDTO = new FreePostDTO(post.getTitle(), post.getContent());
 
+        model.addAttribute("postId",postId);
         model.addAttribute("freePostDTO", freePostDTO);
         return "posts/freePostUpdateForm";
     }

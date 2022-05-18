@@ -19,7 +19,12 @@
         </tr>
         <tr>
             <td colspan="2">
-                <button type="submit">글쓰기</button>
+                <button type="submit">글수정</button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <a th:href="@{/freepost/{id} (id=${postId})}">취소</a>
             </td>
         </tr>
     </table>
