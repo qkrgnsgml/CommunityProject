@@ -27,9 +27,9 @@ public class FreePostController {
     @GetMapping("/freeposts")
     public String freePostList(@SessionAttribute(name = "loginUser", required = false) User loginUser,
             Model model) {
-        List<Post> posts = postService.findAvailablePosts();
+        List<FreePost> freePosts = postService.findAvailableFreePosts();
         model.addAttribute("link", loginUser==null ? "login" : "freepost");
-        model.addAttribute("posts", posts);
+        model.addAttribute("posts", freePosts);
         return "posts/freePostList";
     }
 

@@ -1,6 +1,7 @@
 package com.spa.springCommuProject;
 
 import com.spa.springCommuProject.domain.post.FreePost;
+import com.spa.springCommuProject.domain.post.PhotoPost;
 import com.spa.springCommuProject.domain.post.PostService;
 import com.spa.springCommuProject.domain.user.User;
 import com.spa.springCommuProject.domain.user.UserService;
@@ -23,8 +24,10 @@ public class TestDataInit {
     public void init() {
         User user = new User("park","asdfg","123");
         userService.join(user);
-        FreePost post = new FreePost(user, "title", "content");
+        PhotoPost photoPost = new PhotoPost(user, "title2", "content2");
+        FreePost post = new FreePost(user, "title1", "content1");
         postService.savePost(post);
+        postService.savePost(photoPost);
     }
 
 }

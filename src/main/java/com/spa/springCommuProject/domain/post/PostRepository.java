@@ -27,6 +27,14 @@ public class PostRepository {
         return em.createQuery("select p from Post p", Post.class).getResultList().stream().filter(x->x.getAvailable()==true).collect(Collectors.toList());
     }
 
+    public List<PhotoPost> findAvailableAllPhotoPost(){
+        return em.createQuery("select p from PhotoPost p", PhotoPost.class).getResultList().stream().filter(x->x.getAvailable()==true).collect(Collectors.toList());
+    }
+
+    public List<FreePost> findAvailableAllFreePosts(){
+        return em.createQuery("select p from FreePost p", FreePost.class).getResultList().stream().filter(x->x.getAvailable()==true).collect(Collectors.toList());
+    }
+
     public List<Post> findAll(){
         return em.createQuery("select p from Post p", Post.class).getResultList();
     }

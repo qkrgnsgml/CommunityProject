@@ -1,6 +1,6 @@
 package com.spa.springCommuProject.web.photopost;
 
-import com.spa.springCommuProject.domain.post.Post;
+import com.spa.springCommuProject.domain.post.PhotoPost;
 import com.spa.springCommuProject.domain.post.PostService;
 import com.spa.springCommuProject.domain.user.User;
 import com.spa.springCommuProject.web.freePost.FreePostDTO;
@@ -23,9 +23,9 @@ public class PhotoPostController {
     @GetMapping("/photoposts")
     public String photoPostList(@SessionAttribute(name = "loginUser", required = false) User loginUser,
                                Model model) {
-        List<Post> posts = postService.findAvailablePosts();
+        List<PhotoPost> photoPosts = postService.findAvailablePhotoPosts();
         model.addAttribute("link", loginUser==null ? "login" : "photopost");
-        model.addAttribute("posts", posts);
+        model.addAttribute("posts", photoPosts);
         return "posts/photoPostList";
     }
 
