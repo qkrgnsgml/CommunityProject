@@ -1,0 +1,26 @@
+package com.spa.springCommuProject.web.photopost;
+
+import com.spa.springCommuProject.domain.user.User;
+import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Data
+public class PhotoPostDTO {
+
+
+    @NotBlank(message = "제목을 입력해주세요.")
+    private String title;
+
+    @NotBlank(message = "내용을 입력해주세요.")
+    private String content;
+
+    private LocalDateTime createdDate;
+    private User user;
+
+    private List<MultipartFile> imageFiles;
+
+}

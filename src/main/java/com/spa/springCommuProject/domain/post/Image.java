@@ -17,19 +17,21 @@ public class Image {
     @JoinColumn(name = "post_id")
     private Post post;
 
-    private String originalFileName;
-    private String saveFileName;
-    private String filePath;
-    private Long fileSize;
+    private String uploadFileName;
+    private String storeFileName;
 
-    public Image(String originalFileName, String saveFileName, String filePath, Long fileSize) {
-        this.originalFileName = originalFileName;
-        this.saveFileName = saveFileName;
-        this.filePath = filePath;
-        this.fileSize = fileSize;
+    public Image(String uploadFileName, String storeFileName) {
+        this.uploadFileName = uploadFileName;
+        this.storeFileName = storeFileName;
     }
 
-    public Image() {
+    public Image(Post post, String uploadFileName, String storeFileName) {
+        this.post = post;
+        this.uploadFileName = uploadFileName;
+        this.storeFileName = storeFileName;
+    }
 
+
+    public Image() {
     }
 }

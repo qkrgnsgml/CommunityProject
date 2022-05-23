@@ -34,13 +34,13 @@ public class FreePostController {
     }
 
     @GetMapping("/freepost")
-    public String createForm(FreePostDTO freePostDTO) {
+    public String createFreePostForm(FreePostDTO freePostDTO) {
         log.info("createFreePostForm");
         return "posts/freePostForm";
     }
 
     @PostMapping("/freepost")
-    public String create(@SessionAttribute(name = "loginUser", required = false) User loginUser,
+    public String createFreePost(@SessionAttribute(name = "loginUser", required = false) User loginUser,
                          @Valid FreePostDTO freePostDTO, BindingResult bindingResult) {
         log.info("createFreePost");
 
@@ -58,7 +58,7 @@ public class FreePostController {
     }
 
     @GetMapping("/freepost/{postId}")
-    public String postView(@SessionAttribute(name = "loginUser", required = false) User loginUser,
+    public String freePostView(@SessionAttribute(name = "loginUser", required = false) User loginUser,
             @PathVariable Long postId, Model model) {
         log.info("postView");
 
@@ -73,7 +73,7 @@ public class FreePostController {
     }
 
     @GetMapping("/freepost/{postId}/edit")
-    public String editForm(@PathVariable Long postId, Model model) {
+    public String editFreePostForm(@PathVariable Long postId, Model model) {
         log.info("freePosteditForm");
 
         Post post = postService.findOnePost(postId);
@@ -85,7 +85,7 @@ public class FreePostController {
     }
 
     @PostMapping("/freepost/{postId}/edit")
-    public String edit(@PathVariable Long postId,
+    public String editFreePost(@PathVariable Long postId,
                        @Valid FreePostDTO freePostDTO, BindingResult bindingResult) {
         log.info("freePostedit");
 
@@ -101,7 +101,7 @@ public class FreePostController {
     }
 
     @GetMapping("/freepost/{postId}/delete")
-    public String deleteForm(@PathVariable Long postId, Model model) {
+    public String deleteFreePostForm(@PathVariable Long postId, Model model) {
         log.info("freePostDeleteForm");
 
         model.addAttribute("postId",postId);
@@ -110,7 +110,7 @@ public class FreePostController {
     }
 
     @PostMapping("/freepost/{postId}/delete")
-    public String delete(@PathVariable Long postId) {
+    public String deleteFreePost(@PathVariable Long postId) {
         log.info("freePostDelete");
 
         postService.deleteFreePost(postId);
