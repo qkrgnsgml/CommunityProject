@@ -60,7 +60,7 @@ public class FreePostController {
     @GetMapping("/freepost/{postId}")
     public String freePostView(@SessionAttribute(name = "loginUser", required = false) User loginUser,
             @PathVariable Long postId, Model model) {
-        log.info("postView");
+        log.info("FreepostView");
 
         postService.viewIncrease(postId); //추가
         Post post = postService.findOnePost(postId);

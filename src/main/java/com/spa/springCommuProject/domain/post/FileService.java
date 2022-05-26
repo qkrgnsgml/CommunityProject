@@ -64,5 +64,9 @@ public class FileService {
         return originalFilename.substring(pos + 1);
     }
 
+    public List<Image> findImagesbyPostId(Long postId){
+        return fileRepository.findImagesbyPostId(postId);
+    }
+
 
 }

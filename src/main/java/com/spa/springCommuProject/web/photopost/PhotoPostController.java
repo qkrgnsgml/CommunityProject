@@ -1,19 +1,17 @@
 package com.spa.springCommuProject.web.photopost;
 
-import com.spa.springCommuProject.domain.post.FileService;
-import com.spa.springCommuProject.domain.post.Image;
-import com.spa.springCommuProject.domain.post.PhotoPost;
-import com.spa.springCommuProject.domain.post.PostService;
+import com.spa.springCommuProject.domain.post.*;
 import com.spa.springCommuProject.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 
 @Controller
@@ -55,7 +53,34 @@ public class PhotoPostController {
             fileService.saveImage(image);
         }
 
-        return "posts/filePostForm";
+        Long id = post.getId();
+
+        return "redirect:/photopost/" + id;
+    }
+
+    @GetMapping("/photopost/{postId}")
+    public String photoPostView(@SessionAttribute(name = "loginUser", required = false) User loginUser,
+                               @PathVariable Long postId, Model model) {
+        log.info("photopostView");
+
+        postService.viewIncrease(postId); //추가
+        Post post = postService.findOnePost(postId);
+
+        PhotoPostDTO photoPostDTO = new PhotoPostDTO(post.getTitle(), post.getContent(), post.getCreatedDate(), post.getUser());
+        List<Image> images = fileService.findImagesbyPostId(postId);
+
+        model.addAttribute("loginUserId", loginUser==null ? null : loginUser.getId());
+        model.addAttribute("photoPostDTO", photoPostDTO);
+        model.addAttribute("images", images);
+        model.addAttribute("postId", post.getId());
+        return "posts/photoPostView";
+    }
+
+    @ResponseBody
+    @GetMapping("/images/{filename}")
+    public Resource downloadImage(@PathVariable String filename) throws
+            MalformedURLException {
+        return new UrlResource("file:" + fileService.getFullPath(filename));
     }
 
 

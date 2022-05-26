@@ -23,4 +23,13 @@ public class PhotoPostDTO {
 
     private List<MultipartFile> imageFiles;
 
+    public PhotoPostDTO() {
+    }
+
+    public PhotoPostDTO(String title, String content, LocalDateTime createdDate, User user) {
+        this.title = title;
+        this.content = content;
+        this.createdDate = createdDate;
+        this.user = user;
+    }
 }
