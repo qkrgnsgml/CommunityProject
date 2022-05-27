@@ -26,6 +26,11 @@ public class PhotoPostDTO {
     public PhotoPostDTO() {
     }
 
+    public PhotoPostDTO(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
     public PhotoPostDTO(String title, String content, LocalDateTime createdDate, User user) {
         this.title = title;
         this.content = content;

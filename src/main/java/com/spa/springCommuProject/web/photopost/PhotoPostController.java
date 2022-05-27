@@ -8,8 +8,10 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.List;
@@ -28,13 +30,13 @@ public class PhotoPostController {
         List<PhotoPost> photoPosts = postService.findAvailablePhotoPosts();
         model.addAttribute("link", loginUser==null ? "login" : "photopost");
         model.addAttribute("posts", photoPosts);
-        return "posts/photoPostList";
+        return "posts/photopost/photoPostList";
     }
 
     @GetMapping("/photopost")
     public String createPhotoPostForm(PhotoPostDTO photoPostDTO) {
         log.info("createPhotoPostForm");
-        return "posts/filePostForm";
+        return "posts/photopost/photoPostForm";
     }
 
     @PostMapping("/photopost")
@@ -67,20 +69,66 @@ public class PhotoPostController {
         Post post = postService.findOnePost(postId);
 
         PhotoPostDTO photoPostDTO = new PhotoPostDTO(post.getTitle(), post.getContent(), post.getCreatedDate(), post.getUser());
-        List<Image> images = fileService.findImagesbyPostId(postId);
+        List<Image> images = fileService.findFilesbyPostId(postId);
 
         model.addAttribute("loginUserId", loginUser==null ? null : loginUser.getId());
         model.addAttribute("photoPostDTO", photoPostDTO);
         model.addAttribute("images", images);
         model.addAttribute("postId", post.getId());
-        return "posts/photoPostView";
+        return "posts/photopost/photoPostView";
     }
 
     @ResponseBody
     @GetMapping("/images/{filename}")
     public Resource downloadImage(@PathVariable String filename) throws
             MalformedURLException {
-        return new UrlResource("file:" + fileService.getFullPath(filename));
+        return new UrlResource("file:" + fileService.getFullImagePath(filename));
+    }
+
+    @GetMapping("/photopost/{postId}/edit")
+    public String editPhotoPostForm(@PathVariable Long postId, Model model) {
+        log.info("photoPosteditForm");
+
+        Post post = postService.findOnePost(postId);
+        PhotoPostDTO photoPostDTO = new PhotoPostDTO(post.getTitle(), post.getContent());
+
+        model.addAttribute("postId",postId);
+        model.addAttribute("photoPostDTO", photoPostDTO);
+        return "posts/filepost/photoPostUpdateForm";
+    }
+
+    @PostMapping("/photopost/{postId}/edit")
+    public String editPhotoPost(@PathVariable Long postId,
+                               @Valid PhotoPostDTO photoPostDTO, BindingResult bindingResult) {
+        log.info("photoPostedit");
+
+        if (bindingResult.hasErrors()) {
+            bindingResult.reject("updateFail", "잘못된 정보를 입력했습니다.");
+            log.info("bindingError");
+            return "/posts/photopost/photoPostUpdateForm";
+        } //추가
+
+        postService.updatePost(postId, photoPostDTO.getTitle(), photoPostDTO.getContent());
+
+        return "redirect:/photopost/" + postId;
+    }
+
+    @GetMapping("/photopost/{postId}/delete")
+    public String deletePhotoPostForm(@PathVariable Long postId, Model model) {
+        log.info("PhotoPostDeleteForm");
+
+        model.addAttribute("postId",postId);
+
+        return "posts/photopost/photoPostdeleteForm";
+    }
+
+    @PostMapping("/photopost/{postId}/delete")
+    public String deletePhotoPost(@PathVariable Long postId) {
+        log.info("PhotoPostDelete");
+
+        postService.deletePost(postId);
+
+        return "redirect:/photoposts";
     }
 
 

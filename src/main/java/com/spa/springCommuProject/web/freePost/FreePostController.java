@@ -30,13 +30,13 @@ public class FreePostController {
         List<FreePost> freePosts = postService.findAvailableFreePosts();
         model.addAttribute("link", loginUser==null ? "login" : "freepost");
         model.addAttribute("posts", freePosts);
-        return "posts/freePostList";
+        return "posts/freepost/freePostList";
     }
 
     @GetMapping("/freepost")
     public String createFreePostForm(FreePostDTO freePostDTO) {
         log.info("createFreePostForm");
-        return "posts/freePostForm";
+        return "posts/freepost/freePostForm";
     }
 
     @PostMapping("/freepost")
@@ -47,7 +47,7 @@ public class FreePostController {
         if (bindingResult.hasErrors()) {
             bindingResult.reject("PostCreateFail", "잘못된 정보를 입력했습니다.");
             log.info("bindingError");
-            return "/posts/freePostForm";
+            return "/posts/freepost/freePostForm";
         } //추가
 
         FreePost freePost = new FreePost(loginUser, freePostDTO.getTitle(), freePostDTO.getContent());
@@ -69,7 +69,7 @@ public class FreePostController {
         model.addAttribute("loginUserId", loginUser==null ? null : loginUser.getId());
         model.addAttribute("freePostDTO", freePostDTO);
         model.addAttribute("postId", post.getId());
-        return "posts/freePostView";
+        return "posts/freepost/freePostView";
     }
 
     @GetMapping("/freepost/{postId}/edit")
@@ -81,7 +81,7 @@ public class FreePostController {
 
         model.addAttribute("postId",postId);
         model.addAttribute("freePostDTO", freePostDTO);
-        return "posts/freePostUpdateForm";
+        return "posts/freepost/freePostUpdateForm";
     }
 
     @PostMapping("/freepost/{postId}/edit")
@@ -92,10 +92,10 @@ public class FreePostController {
         if (bindingResult.hasErrors()) {
             bindingResult.reject("updateFail", "잘못된 정보를 입력했습니다.");
             log.info("bindingError");
-            return "/posts/freePostUpdateForm";
+            return "/posts/freepost/freePostUpdateForm";
         } //추가
 
-        postService.updateFreePost(postId, freePostDTO.getTitle(), freePostDTO.getContent());
+        postService.updatePost(postId, freePostDTO.getTitle(), freePostDTO.getContent());
 
         return "redirect:/freepost/" + postId;
     }
@@ -106,14 +106,14 @@ public class FreePostController {
 
         model.addAttribute("postId",postId);
 
-        return "posts/deleteForm";
+        return "posts/freepost/freePostdeleteForm";
     }
 
     @PostMapping("/freepost/{postId}/delete")
     public String deleteFreePost(@PathVariable Long postId) {
         log.info("freePostDelete");
 
-        postService.deleteFreePost(postId);
+        postService.deletePost(postId);
 
         return "redirect:/freeposts";
     }

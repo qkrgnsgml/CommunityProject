@@ -6,8 +6,8 @@ spring:
     driver-class-name: org.h2.Driver
   servlet:
     multipart:
-      maxFileSize: 10MB
-      maxRequestSize: 20MB
+      maxFileSize: 1000MB
+      maxRequestSize: 2000MB
 
   jpa:
     hibernate:
@@ -26,5 +26,8 @@ server:
       timeout: 30m
       tracking-modes: cookie
 
-file:
-  dir: C:/Users/spa89/Downloads/develop/springCommuProject/file/
+image:
+  dir: C:/Users/spa89/Downloads/develop/springCommuProject/file/image
+
+video:
+  dir: C:/Users/spa89/Downloads/develop/springCommuProject/file/video

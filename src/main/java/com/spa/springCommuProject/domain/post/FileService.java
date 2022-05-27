@@ -19,11 +19,18 @@ public class FileService {
 
     private final FileRepository fileRepository;
 
-    @Value("${file.dir}")
-    private String fileDir;
+    @Value("${image.dir}")
+    private String imageDir;
 
-    public String getFullPath(String filename){
-        return fileDir + filename;
+    @Value("${video.dir}")
+    private String videoDir;
+
+    public String getFullImagePath(String filename){
+        return imageDir + filename;
+    }
+
+    public String getFullVideoPath(String filename){
+        return videoDir + filename;
     }
 
     @Transactional
@@ -36,20 +43,20 @@ public class FileService {
         List<Image> storeFileResult = new ArrayList<>();
         for (MultipartFile multipartFile : multipartFiles) {
             if(!multipartFile.isEmpty()){
-                storeFileResult.add(storeFile(multipartFile));
+                storeFileResult.add(storeImage(multipartFile));
             }
         }
         return storeFileResult;
     }
 
-    private Image storeFile(MultipartFile multipartFile) throws IOException{
+    private Image storeImage(MultipartFile multipartFile) throws IOException{
         if(multipartFile.isEmpty()){
             return null;
         }
 
         String originalFilename = multipartFile.getOriginalFilename();
         String storeFileName = createStoreFileName(originalFilename);
-        multipartFile.transferTo(new File(getFullPath(storeFileName)));
+        multipartFile.transferTo(new File(getFullImagePath(storeFileName)));
         return new Image(originalFilename, storeFileName);
     }
 
@@ -64,7 +71,7 @@ public class FileService {
         return originalFilename.substring(pos + 1);
     }
 
-    public List<Image> findImagesbyPostId(Long postId){
+    public List<Image> findFilesbyPostId(Long postId){
         return fileRepository.findImagesbyPostId(postId);
     }
 

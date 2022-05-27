@@ -43,13 +43,13 @@ public class PostService {
     }
 
     @Transactional
-    public void updateFreePost(Long postId, String title, String content) {
+    public void updatePost(Long postId, String title, String content) {
         Post findPost = postRepository.findOnePost(postId);
         findPost.update(title,content);
     }
 
     @Transactional
-    public void deleteFreePost(Long postId) {
+    public void deletePost(Long postId) {
         Post findPost = postRepository.findOnePost(postId);
         findPost.delete();
     }
