@@ -1,9 +1,14 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+</head>
 <body>
 <header th:replace="~{fragment/header :: menubar}"></header>
-<form th:action th:object="${photoPostDTO}" method="post">
-    <h3 style="text-align: center;">사진게시판 글수정화면</h3>
+
+<form th:action th:object="${videoPostDTO}" method="post" enctype="multipart/form-data">
+    <h3 style="text-align: center;">동영상게시판 업로드 화면</h3>
+
     <table style="text-align: center;width:60%; margin: auto;" border="1">
         <tr th:if="${#fields.hasErrors()}">
             <td th:errors="*{title}"/>
@@ -18,17 +23,15 @@
             <td><textarea rows="20" th:field="*{content}" placeholder="글 내용" required></textarea></td>
         </tr>
         <tr>
-            <td colspan="2">
-                <button type="submit">글수정</button>
-            </td>
+            <td>사진</td>
+            <td><input type="file" name="imageFiles" multiple="multiple" ></li></td>
         </tr>
         <tr>
             <td colspan="2">
-                <a th:href="@{/photopost/{id} (id=${postId})}">취소</a>
+                <button type="submit">글쓰기</button>
             </td>
         </tr>
     </table>
 </form>
-
 </body>
 </html>

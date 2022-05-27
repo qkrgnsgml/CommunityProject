@@ -1,8 +1,9 @@
 package com.spa.springCommuProject;
 
-import com.spa.springCommuProject.domain.post.FreePost;
-import com.spa.springCommuProject.domain.post.PhotoPost;
-import com.spa.springCommuProject.domain.post.PostService;
+import com.spa.springCommuProject.domain.post.entity.FreePost;
+import com.spa.springCommuProject.domain.post.entity.PhotoPost;
+import com.spa.springCommuProject.domain.post.entity.VideoPost;
+import com.spa.springCommuProject.domain.post.service.PostService;
 import com.spa.springCommuProject.domain.user.User;
 import com.spa.springCommuProject.domain.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +27,10 @@ public class TestDataInit {
         userService.join(user);
         PhotoPost photoPost = new PhotoPost(user, "PhotoTitle", "PhotoContent");
         FreePost post = new FreePost(user, "FreeTitle", "FreeContent");
+        VideoPost videoPost = new VideoPost(user, "VideoTitle", "VideoContent");
         postService.savePost(post);
         postService.savePost(photoPost);
+        postService.savePost(videoPost);
     }
 
 }

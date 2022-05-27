@@ -1,4 +1,4 @@
-package com.spa.springCommuProject.domain.post;
+package com.spa.springCommuProject.domain.post.entity;
 
 import com.spa.springCommuProject.domain.user.User;
 import lombok.Getter;

@@ -1,6 +1,10 @@
 package com.spa.springCommuProject.web.photopost;
 
-import com.spa.springCommuProject.domain.post.*;
+import com.spa.springCommuProject.domain.post.entity.Image;
+import com.spa.springCommuProject.domain.post.entity.PhotoPost;
+import com.spa.springCommuProject.domain.post.entity.Post;
+import com.spa.springCommuProject.domain.post.service.FileService;
+import com.spa.springCommuProject.domain.post.service.PostService;
 import com.spa.springCommuProject.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +47,7 @@ public class PhotoPostController {
     public String createPhotoPost(@SessionAttribute(name = "loginUser", required = false) User loginUser,
                                   PhotoPostDTO photoPostDTO) throws IOException {
         log.info("createPhotoPost");
-        List<Image> storeImageFiles = fileService.storeFiles(photoPostDTO.getImageFiles());
+        List<Image> storeImageFiles = fileService.storeImages(photoPostDTO.getImageFiles());
 
         //데이터베이스에 저장
         PhotoPost post = new PhotoPost(loginUser, photoPostDTO.getTitle(),
@@ -69,7 +73,7 @@ public class PhotoPostController {
         Post post = postService.findOnePost(postId);
 
         PhotoPostDTO photoPostDTO = new PhotoPostDTO(post.getTitle(), post.getContent(), post.getCreatedDate(), post.getUser());
-        List<Image> images = fileService.findFilesbyPostId(postId);
+        List<Image> images = fileService.findImagesbyPostId(postId);
 
         model.addAttribute("loginUserId", loginUser==null ? null : loginUser.getId());
         model.addAttribute("photoPostDTO", photoPostDTO);
@@ -94,7 +98,7 @@ public class PhotoPostController {
 
         model.addAttribute("postId",postId);
         model.addAttribute("photoPostDTO", photoPostDTO);
-        return "posts/filepost/photoPostUpdateForm";
+        return "posts/photopost/photoPostUpdateForm";
     }
 
     @PostMapping("/photopost/{postId}/edit")

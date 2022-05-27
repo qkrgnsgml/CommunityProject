@@ -1,6 +1,11 @@
-package com.spa.springCommuProject.domain.post;
+package com.spa.springCommuProject.domain.post.service;
 
 
+import com.spa.springCommuProject.domain.post.entity.FreePost;
+import com.spa.springCommuProject.domain.post.entity.PhotoPost;
+import com.spa.springCommuProject.domain.post.entity.Post;
+import com.spa.springCommuProject.domain.post.entity.VideoPost;
+import com.spa.springCommuProject.domain.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +39,10 @@ public class PostService {
 
     public List<PhotoPost> findAvailablePhotoPosts(){
         return postRepository.findAvailableAllPhotoPost();
+    }
+
+    public List<VideoPost> findAvailableVideoPosts(){
+        return postRepository.findAvailableAllVideoPost();
     }
 
 

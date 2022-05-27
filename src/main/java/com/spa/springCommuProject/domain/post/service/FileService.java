@@ -1,5 +1,8 @@
-package com.spa.springCommuProject.domain.post;
+package com.spa.springCommuProject.domain.post.service;
 
+import com.spa.springCommuProject.domain.post.entity.Image;
+import com.spa.springCommuProject.domain.post.entity.Video;
+import com.spa.springCommuProject.domain.post.repository.FileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -39,11 +42,27 @@ public class FileService {
         return image.getId();
     }
 
-    public List<Image> storeFiles(List<MultipartFile> multipartFiles) throws IOException{
+    @Transactional
+    public Long saveVideo(Video video){
+        fileRepository.save(video);
+        return video.getId();
+    }
+
+    public List<Image> storeImages(List<MultipartFile> multipartFiles) throws IOException{
         List<Image> storeFileResult = new ArrayList<>();
         for (MultipartFile multipartFile : multipartFiles) {
             if(!multipartFile.isEmpty()){
                 storeFileResult.add(storeImage(multipartFile));
+            }
+        }
+        return storeFileResult;
+    }
+
+    public List<Video> storeVideos(List<MultipartFile> multipartFiles) throws IOException{
+        List<Video> storeFileResult = new ArrayList<>();
+        for (MultipartFile multipartFile : multipartFiles) {
+            if(!multipartFile.isEmpty()){
+                storeFileResult.add(storeVideo(multipartFile));
             }
         }
         return storeFileResult;
@@ -60,6 +79,17 @@ public class FileService {
         return new Image(originalFilename, storeFileName);
     }
 
+    private Video storeVideo(MultipartFile multipartFile) throws IOException{
+        if(multipartFile.isEmpty()){
+            return null;
+        }
+
+        String originalFilename = multipartFile.getOriginalFilename();
+        String storeFileName = createStoreFileName(originalFilename);
+        multipartFile.transferTo(new File(getFullVideoPath(storeFileName)));
+        return new Video(originalFilename, storeFileName);
+    }
+
     private String createStoreFileName(String originalFilename) {
         String ext = extractExt(originalFilename);
         String uuid = UUID.randomUUID().toString();
@@ -71,8 +101,12 @@ public class FileService {
         return originalFilename.substring(pos + 1);
     }
 
-    public List<Image> findFilesbyPostId(Long postId){
+    public List<Image> findImagesbyPostId(Long postId){
         return fileRepository.findImagesbyPostId(postId);
+    }
+
+    public List<Video> findVideossbyPostId(Long postId){
+        return fileRepository.findVideosbyPostId(postId);
     }
 
 

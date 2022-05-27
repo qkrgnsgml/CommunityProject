@@ -27,7 +27,7 @@ server:
       tracking-modes: cookie
 
 image:
-  dir: C:/Users/spa89/Downloads/develop/springCommuProject/file/image
+  dir: C:/Users/spa89/Downloads/develop/springCommuProject/file/image/
 
 video:
-  dir: C:/Users/spa89/Downloads/develop/springCommuProject/file/video
+  dir: C:/Users/spa89/Downloads/develop/springCommuProject/file/video/

@@ -1,4 +1,4 @@
-package com.spa.springCommuProject.domain.post;
+package com.spa.springCommuProject.domain.post.entity;
 
 import com.spa.springCommuProject.domain.user.User;
 import lombok.Getter;
@@ -11,21 +11,21 @@ import java.util.List;
 
 @Getter
 @Entity
-public class PhotoPost extends Post{
+public class VideoPost extends Post{
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.PERSIST)
-    private List<Image> photo = new ArrayList<>();
+    private List<Video> videos = new ArrayList<>();
 
-    public PhotoPost() {
+    public VideoPost() {
 
     }
 
-    public PhotoPost(User user, String title, String content, List<Image> photo) {
+    public VideoPost(User user, String title, String content, List<Video> videos) {
         super(user, title, content);
-        this.photo = photo;
+        this.videos = videos;
     }
 
-    public PhotoPost(User user, String title, String content) {
+    public VideoPost(User user, String title, String content) {
         super(user, title, content);
     }
 }

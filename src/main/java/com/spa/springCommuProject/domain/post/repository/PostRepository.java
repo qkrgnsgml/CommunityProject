@@ -1,7 +1,11 @@
-package com.spa.springCommuProject.domain.post;
+package com.spa.springCommuProject.domain.post.repository;
 
 
 
+import com.spa.springCommuProject.domain.post.entity.FreePost;
+import com.spa.springCommuProject.domain.post.entity.PhotoPost;
+import com.spa.springCommuProject.domain.post.entity.Post;
+import com.spa.springCommuProject.domain.post.entity.VideoPost;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -29,6 +33,10 @@ public class PostRepository {
 
     public List<PhotoPost> findAvailableAllPhotoPost(){
         return em.createQuery("select p from PhotoPost p", PhotoPost.class).getResultList().stream().filter(x->x.getAvailable()==true).collect(Collectors.toList());
+    }
+
+    public List<VideoPost> findAvailableAllVideoPost(){
+        return em.createQuery("select v from VideoPost v", VideoPost.class).getResultList().stream().filter(x->x.getAvailable()==true).collect(Collectors.toList());
     }
 
     public List<FreePost> findAvailableAllFreePosts(){

@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<header th:replace="~{fragment/header :: menubar}"></header>
+<div>
+    <form th:action method="post">
+        <h3 style="text-align: center;">동영상 글삭제 화면</h3>
+        <table style="text-align: center;width:40%; margin: auto;" border="1">
+            <tr>
+                <td th:colspan="2">
+                    정말 삭제하시겠습니까?
+                </td>
+            </tr>
+            <tr>
+                <td style="width:50%">
+                    <button type="submit">삭제</button>
+                </td>
+                <td>
+                    <a th:href="@{/videopost/{id} (id=${postId})}">뒤로</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <br/>
+</div> <!-- /container -->
+</body>
+</html>

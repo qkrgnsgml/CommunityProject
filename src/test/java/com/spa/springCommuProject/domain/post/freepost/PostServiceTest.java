@@ -1,8 +1,8 @@
 package com.spa.springCommuProject.domain.post.freepost;
 
-import com.spa.springCommuProject.domain.post.Post;
-import com.spa.springCommuProject.domain.post.PostRepository;
-import com.spa.springCommuProject.domain.post.PostService;
+import com.spa.springCommuProject.domain.post.entity.Post;
+import com.spa.springCommuProject.domain.post.repository.PostRepository;
+import com.spa.springCommuProject.domain.post.service.PostService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

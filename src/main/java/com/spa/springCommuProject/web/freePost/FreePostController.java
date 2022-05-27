@@ -1,8 +1,8 @@
 package com.spa.springCommuProject.web.freePost;
 
-import com.spa.springCommuProject.domain.post.FreePost;
-import com.spa.springCommuProject.domain.post.Post;
-import com.spa.springCommuProject.domain.post.PostService;
+import com.spa.springCommuProject.domain.post.entity.FreePost;
+import com.spa.springCommuProject.domain.post.entity.Post;
+import com.spa.springCommuProject.domain.post.service.PostService;
 import com.spa.springCommuProject.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
