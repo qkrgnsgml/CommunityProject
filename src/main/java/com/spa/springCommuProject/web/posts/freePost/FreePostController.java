@@ -1,4 +1,4 @@
-package com.spa.springCommuProject.web.freePost;
+package com.spa.springCommuProject.web.posts.freePost;
 
 import com.spa.springCommuProject.domain.post.entity.FreePost;
 import com.spa.springCommuProject.domain.post.entity.Post;

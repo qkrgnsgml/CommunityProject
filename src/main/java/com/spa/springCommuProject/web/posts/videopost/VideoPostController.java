@@ -1,4 +1,4 @@
-package com.spa.springCommuProject.web.videopost;
+package com.spa.springCommuProject.web.posts.videopost;
 
 import com.spa.springCommuProject.domain.post.entity.Post;
 import com.spa.springCommuProject.domain.post.entity.Video;

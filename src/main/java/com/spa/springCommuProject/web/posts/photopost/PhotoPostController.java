@@ -1,4 +1,4 @@
-package com.spa.springCommuProject.web.photopost;
+package com.spa.springCommuProject.web.posts.photopost;
 
 import com.spa.springCommuProject.domain.post.entity.Image;
 import com.spa.springCommuProject.domain.post.entity.PhotoPost;
