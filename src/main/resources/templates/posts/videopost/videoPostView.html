@@ -27,6 +27,8 @@
     <div style="text-align: center; margin: auto;">
         <a th:if="${videoPostDTO.user.id} == ${loginUserId}" th:href="@{/videopost/{id}/edit (id=${postId})}">수정</a>
         <a th:if="${videoPostDTO.user.id} == ${loginUserId}" th:href="@{/videopost/{id}/delete (id=${postId})}">삭제</a>
+        <a th:if="${loginUserLoginId}=='root'" th:href="@{/user/{id}/big (id=${videoPostDTO.user.id})}">3대력 부여</a>
+        <a th:if="${loginUserLoginId}=='root'" th:href="@{/videopost/{id}/delete (id=${postId})}">강제삭제</a>
     </div>
 </div> <!-- /container -->
 </body>

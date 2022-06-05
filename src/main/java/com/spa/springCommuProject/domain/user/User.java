@@ -24,7 +24,7 @@ public class User {
     private Role role;
 
     @Embedded
-    private bigThreePower bigThreePower;
+    private BigThreePower bigThreePower;
 
     //@OneToMany(mappedBy = "user")
     //private List<Post> posts = new ArrayList<>();
@@ -44,7 +44,7 @@ public class User {
         this.loginId = loginId;
         this.password = password;
         this.role = Role.USER; //default값
-        this.bigThreePower = new bigThreePower(0,0,0); //default값
+        this.bigThreePower = new BigThreePower(0,0,0); //default값
     }
 
     public void update(String nickName, String password){
@@ -54,6 +54,10 @@ public class User {
 
     public void delete(){
         this.available = false;
+    }
+
+    public void updateBig(BigThreePower bigThreePower){
+        this.bigThreePower = bigThreePower;
     }
 
 }

@@ -23,6 +23,7 @@
     <div style="text-align: center; margin: auto;">
         <a th:if="${freePostDTO.user.id} == ${loginUserId}" th:href="@{/freepost/{id}/edit (id=${postId})}">수정</a>
         <a th:if="${freePostDTO.user.id} == ${loginUserId}" th:href="@{/freepost/{id}/delete (id=${postId})}">삭제</a>
+        <a th:if="${loginUserLoginId}=='root'" th:href="@{/freepost/{id}/delete (id=${postId})}">강제삭제</a>
     </div>
 </div> <!-- /container -->
 </body>

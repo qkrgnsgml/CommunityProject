@@ -68,6 +68,7 @@ public class FreePostController {
 
         model.addAttribute("loginUserId", loginUser==null ? null : loginUser.getId());
         model.addAttribute("freePostDTO", freePostDTO);
+        model.addAttribute("loginUserLoginId", loginUser==null ? null : loginUser.getLoginId());
         model.addAttribute("postId", post.getId());
         return "posts/freepost/freePostView";
     }

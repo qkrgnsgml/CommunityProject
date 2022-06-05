@@ -6,7 +6,7 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 @Getter
-public class bigThreePower {
+public class BigThreePower {
 
 
     private int squat;
@@ -14,10 +14,10 @@ public class bigThreePower {
     private int dead;
     private int sum;
 
-    protected bigThreePower() {
+    protected BigThreePower() {
     }
 
-    public bigThreePower(int squat, int bench, int dead) {
+    public BigThreePower(int squat, int bench, int dead) {
         this.squat = squat;
         this.bench = bench;
         this.dead = dead;

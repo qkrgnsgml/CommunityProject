@@ -27,6 +27,7 @@
     <div style="text-align: center; margin: auto;">
         <a th:if="${photoPostDTO.user.id} == ${loginUserId}" th:href="@{/photopost/{id}/edit (id=${postId})}">수정</a>
         <a th:if="${photoPostDTO.user.id} == ${loginUserId}" th:href="@{/photopost/{id}/delete (id=${postId})}">삭제</a>
+        <a th:if="${loginUserLoginId}=='root'" th:href="@{/photopost/{id}/delete (id=${postId})}">강제삭제</a>
     </div>
 </div> <!-- /container -->
 </body>

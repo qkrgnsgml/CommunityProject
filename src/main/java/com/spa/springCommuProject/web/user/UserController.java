@@ -1,6 +1,7 @@
 package com.spa.springCommuProject.web.user;
 
 
+import com.spa.springCommuProject.domain.user.BigThreePower;
 import com.spa.springCommuProject.domain.user.User;
 import com.spa.springCommuProject.domain.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -157,5 +158,26 @@ public class UserController {
         userService.deleteUser(userId);
         return "redirect:/logout";
     }
+
+    @GetMapping("/user/{userId}/big")
+    public String BigthreeForm(@PathVariable Long userId, Model model, BigThreeDTO bigThreeDTO) {
+        log.info("BigthreeForm");
+
+        model.addAttribute("userId",userId);
+
+        return "user/threeForm";
+    }
+
+    @PostMapping("/user/{userId}/big")
+    public String Bigthree(@PathVariable Long userId, BigThreeDTO bigThreeDTO) {
+        log.info("Bigthree");
+
+        BigThreePower bigThreePower = new BigThreePower(bigThreeDTO.getSquat(), bigThreeDTO.getBench(), bigThreeDTO.getDead());
+        userService.updateBigThree(userId, bigThreePower);
+
+        return "redirect:/videoposts";
+    }
+
+
 
 }

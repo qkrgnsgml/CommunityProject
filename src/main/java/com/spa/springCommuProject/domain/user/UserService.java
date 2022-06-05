@@ -57,4 +57,10 @@ public class UserService {
         User findUser = userRepository.findOne(userId);
         findUser.delete();
     }
+
+    @Transactional
+    public void updateBigThree(Long userId, BigThreePower bigThreePower){
+        User findUser = userRepository.findOne(userId);
+        findUser.updateBig(bigThreePower);
+    }
 }

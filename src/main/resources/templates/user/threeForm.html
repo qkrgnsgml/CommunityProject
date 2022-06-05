@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header th:replace="~{fragment/header :: menubar}"></header>
+<h3 style="text-align: center;">3대력부여화면</h3>
+<form th:action th:object="${bigThreeDTO}" method="post">
+    <table style="text-align: center; width:30%; margin: auto;" border="1">
+        <tr>
+            <td>벤치프레스</td>
+            <td><input type="text" th:field="*{bench}" placeholder="벤치" required></td>
+        </tr>
+        <tr>
+            <td>스쿼트</td>
+            <td><input type="text" th:field="*{squat}" placeholder="스쿼트" required></td>
+        </tr>
+        <tr>
+            <td>데드리프트</td>
+            <td><input type="text" th:field="*{dead}" placeholder="데드" required></td>
+        </tr>
+        <tr>
+            <td><a href="/user">취소</a></td>
+            <td><input type="submit" value="부여"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

@@ -76,6 +76,7 @@ public class VideoPostController {
         List<Video> videos = fileService.findVideossbyPostId(postId);
 
         model.addAttribute("loginUserId", loginUser==null ? null : loginUser.getId());
+        model.addAttribute("loginUserLoginId", loginUser==null ? null : loginUser.getLoginId());
         model.addAttribute("videoPostDTO", videoPostDTO);
         model.addAttribute("videos", videos);
         model.addAttribute("postId", post.getId());
@@ -134,8 +135,6 @@ public class VideoPostController {
 
         return "redirect:/videoposts";
     }
-
-
 
 
 }
