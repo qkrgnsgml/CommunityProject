@@ -22,7 +22,7 @@ public class UserService {
     }
 
     private void validateDuplicateUser(User user) {
-        List<User> findUserByNickName = userRepository.finByNickName(user.getNickName());
+        List<User> findUserByNickName = userRepository.findByNickName(user.getNickName());
         if(!findUserByNickName.isEmpty()){
             throw new IllegalStateException("이미 존재하는 닉네임입니다.");
         }
@@ -45,6 +45,10 @@ public class UserService {
          */
         return userRepository.findByLoginId(loginId).filter(m->m.getPassword().equals(password))
                 .orElse(null);
+    }
+
+    public List<User> findUsersSumDesc(){
+        return userRepository.findUsersSumDesc();
     }
 
     @Transactional
