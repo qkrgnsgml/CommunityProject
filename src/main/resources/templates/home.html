@@ -6,6 +6,6 @@
 </head>
 <body>
     <header th:replace="~{fragment/header.html :: menubar}"></header>
-    <side th:replace="~{fragment/side.html :: sidebar}"></side>
+    <side th:replace="~{fragment/side.html :: sidebar(ranks=${ranks})}"></side>
 </body>
 </html>

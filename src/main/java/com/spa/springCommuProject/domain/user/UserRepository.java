@@ -37,7 +37,8 @@ public class UserRepository {
     }
 
     public List<User> findUsersSumDesc(){
-        return em.createQuery("select u from User u order by u.bigThreePower.sum desc", User.class)
+        return em.createQuery("select u from User u where u.available = :available order by u.bigThreePower.sum desc", User.class)
+                .setParameter("available", true)
                 .setFirstResult(0)
                 .setMaxResults(10)
                 .getResultList();

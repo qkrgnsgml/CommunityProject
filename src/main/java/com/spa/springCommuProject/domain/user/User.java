@@ -52,6 +52,10 @@ public class User {
         this.password = password;
     }
 
+    public void setRole(Role role){
+        this.role = role;
+    }
+
     public void delete(){
         this.available = false;
     }
