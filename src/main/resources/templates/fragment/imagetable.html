@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table th:fragment="imagetable(images)" border="1">
+    <tr>
+        <td style="text-align: center" colspan="3">인기의 사진들</td>
+    </tr>
+    <tr>
+        <td th:each="image: ${images}">
+            <a th:if="${image.getPostId()}!=null" th:href="@{/photopost/{id} (id=${image.getPostId()})}">
+                <img th:src="|/images/${image.getStoreFileName()}|" width="350" height="350"/>
+            </a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

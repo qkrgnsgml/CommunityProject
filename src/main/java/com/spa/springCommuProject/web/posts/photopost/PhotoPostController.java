@@ -73,7 +73,7 @@ public class PhotoPostController {
         Post post = postService.findOnePost(postId);
 
         PhotoPostDTO photoPostDTO = new PhotoPostDTO(post.getTitle(), post.getContent(), post.getCreatedDate(), post.getUser());
-        List<Image> images = fileService.findImagesbyPostId(postId);
+        List<Image> images = fileService.findImagesByPostId(postId);
 
         model.addAttribute("loginUserId", loginUser==null ? null : loginUser.getId());
         model.addAttribute("loginUserLoginId", loginUser==null ? null : loginUser.getLoginId());

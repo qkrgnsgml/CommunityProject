@@ -73,7 +73,7 @@ public class VideoPostController {
         Post post = postService.findOnePost(postId);
 
         VideoPostDTO videoPostDTO = new VideoPostDTO(post.getTitle(), post.getContent(), post.getCreatedDate(), post.getUser());
-        List<Video> videos = fileService.findVideossbyPostId(postId);
+        List<Video> videos = fileService.findVideosByPostId(postId);
 
         model.addAttribute("loginUserId", loginUser==null ? null : loginUser.getId());
         model.addAttribute("loginUserLoginId", loginUser==null ? null : loginUser.getLoginId());

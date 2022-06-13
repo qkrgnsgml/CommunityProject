@@ -5,7 +5,14 @@
     <title>Title</title>
 </head>
 <body>
-    <header th:replace="~{fragment/header.html :: menubar}"></header>
-    <side th:replace="~{fragment/side.html :: sidebar(ranks=${ranks})}"></side>
+<header th:replace="~{fragment/header.html :: menubar}"></header>
+<div style="margin: auto">
+    <div style="float: left;text-align: center">
+        <side th:replace="~{fragment/side.html :: sidebar(ranks=${ranks})}"></side>
+    </div>
+    <div style="float: left">
+        <table th:replace="~{fragment/imagetable.html :: imagetable(images=${images})}"></table>
+    </div>
+</div>
 </body>
 </html>

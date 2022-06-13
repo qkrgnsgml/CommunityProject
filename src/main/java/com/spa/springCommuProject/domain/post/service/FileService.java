@@ -101,12 +101,16 @@ public class FileService {
         return originalFilename.substring(pos + 1);
     }
 
-    public List<Image> findImagesbyPostId(Long postId){
-        return fileRepository.findImagesbyPostId(postId);
+    public List<Image> findImagesByPostId(Long postId){
+        return fileRepository.findImagesByPostId(postId);
     }
 
-    public List<Video> findVideossbyPostId(Long postId){
-        return fileRepository.findVideosbyPostId(postId);
+    public Image findOneImageByPostId(Long postId){
+        return fileRepository.findOneImageByPostId(postId);
+    }
+
+    public List<Video> findVideosByPostId(Long postId){
+        return fileRepository.findVideosByPostId(postId);
     }
 
 

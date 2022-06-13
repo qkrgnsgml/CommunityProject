@@ -1,7 +1,6 @@
 package com.spa.springCommuProject.domain.post.repository;
 
 
-
 import com.spa.springCommuProject.domain.post.entity.FreePost;
 import com.spa.springCommuProject.domain.post.entity.PhotoPost;
 import com.spa.springCommuProject.domain.post.entity.Post;
@@ -33,6 +32,14 @@ public class PostRepository {
 
     public List<PhotoPost> findAvailableAllPhotoPost(){
         return em.createQuery("select p from PhotoPost p", PhotoPost.class).getResultList().stream().filter(x->x.getAvailable()==true).collect(Collectors.toList());
+    }
+
+    public List<PhotoPost> findAvailableAllPhotoPostViewDesc(){
+        return em.createQuery("select p from PhotoPost p where p.available = :available order by p.view desc", PhotoPost.class)
+                .setParameter("available", true)
+                .setFirstResult(0)
+                .setMaxResults(3)
+                .getResultList();
     }
 
     public List<VideoPost> findAvailableAllVideoPost(){

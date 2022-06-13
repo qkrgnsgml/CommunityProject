@@ -22,11 +22,19 @@ public class FileRepository {
         em.persist(video);
     }
 
-    public List<Image> findImagesbyPostId(Long postId){
-        return em.createQuery("select i from Image i", Image.class).getResultList().stream().filter(x->x.getPost().getId()==postId).collect(Collectors.toList());
+    public List<Image> findImagesByPostId(Long postId){
+        return em.createQuery("select i from Image i", Image.class).getResultList().stream().filter(x->x.getPost().getId().equals(postId)).collect(Collectors.toList());
     }
 
-    public List<Video> findVideosbyPostId(Long postId){
-        return em.createQuery("select v from Video v", Video.class).getResultList().stream().filter(x->x.getPost().getId()==postId).collect(Collectors.toList());
+    public Image findOneImageByPostId(Long postId){
+        List<Image> images = findImagesByPostId(postId);
+        if(images.isEmpty()){
+            return new Image("없는 파일","없는 파일");
+        }
+        return images.get(0);
+    }
+
+    public List<Video> findVideosByPostId(Long postId){
+        return em.createQuery("select v from Video v", Video.class).getResultList().stream().filter(x->x.getPost().getId().equals(postId)).collect(Collectors.toList());
     }
 }

@@ -41,6 +41,10 @@ public class PostService {
         return postRepository.findAvailableAllPhotoPost();
     }
 
+    public List<PhotoPost> findAvailableAllPhotoPostViewDesc(){
+        return postRepository.findAvailableAllPhotoPostViewDesc();
+    }
+
     public List<VideoPost> findAvailableVideoPosts(){
         return postRepository.findAvailableAllVideoPost();
     }

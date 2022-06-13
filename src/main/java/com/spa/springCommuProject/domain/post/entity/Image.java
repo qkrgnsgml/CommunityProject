@@ -17,6 +17,10 @@ public class Image {
     @JoinColumn(name = "post_id")
     private Post post;
 
+    public Long getPostId(){
+        return this.post.getId();
+    }
+
     private String uploadFileName;
     private String storeFileName;
 
