@@ -31,6 +31,14 @@
             </tbody>
         </table>
     </div>
+    <br>
+    <div style="text-align: center">
+        <th:block th:each="num : ${#numbers.sequence(1, size)}">
+            <a th:href="@{/freeposts/{num} (num=${num}-1)}">
+                <span th:text="${num}"></span>
+            </a>
+        </th:block>
+    </div>
 </div>
 </body>
 </html>

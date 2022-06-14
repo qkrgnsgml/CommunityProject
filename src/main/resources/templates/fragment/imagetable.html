@@ -5,14 +5,14 @@
     <title>Title</title>
 </head>
 <body>
-<table th:fragment="imagetable(images)" border="1">
+<table th:fragment="imagetable(images)" border="1" style="width: 50vw; height: 30vh">
     <tr>
-        <td style="text-align: center" colspan="3">인기의 사진들</td>
+        <td style="text-align: center" colspan="3"><h2>인기의 사진들</h2></td>
     </tr>
     <tr>
         <td th:each="image: ${images}">
             <a th:if="${image.getPostId()}!=null" th:href="@{/photopost/{id} (id=${image.getPostId()})}">
-                <img th:src="|/images/${image.getStoreFileName()}|" width="350" height="350"/>
+                <img th:src="|/images/${image.getStoreFileName()}|" style="width: 100%;height: 100%"/>
             </a>
         </td>
     </tr>

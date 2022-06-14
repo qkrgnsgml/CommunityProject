@@ -18,6 +18,9 @@ public class Image {
     private Post post;
 
     public Long getPostId(){
+        if(this.post==null){
+            return 1L;
+        }
         return this.post.getId();
     }
 

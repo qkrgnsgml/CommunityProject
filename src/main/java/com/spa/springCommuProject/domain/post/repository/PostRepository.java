@@ -41,13 +41,36 @@ public class PostRepository {
                 .setMaxResults(3)
                 .getResultList();
     }
+    public List<PhotoPost> findAvailablePagingPhotoPosts(int page){
+        return em.createQuery("select p from PhotoPost p where p.available = :available order by p.createdDate desc", PhotoPost.class)
+                .setParameter("available",true)
+                .setFirstResult(page*10)
+                .setMaxResults(page*10+10)
+                .getResultList();
+    }
 
     public List<VideoPost> findAvailableAllVideoPost(){
         return em.createQuery("select v from VideoPost v", VideoPost.class).getResultList().stream().filter(x->x.getAvailable()==true).collect(Collectors.toList());
     }
 
+    public List<VideoPost> findAvailablePagingVideoPosts(int page){
+        return em.createQuery("select v from VideoPost v where v.available = :available order by v.createdDate desc", VideoPost.class)
+                .setParameter("available",true)
+                .setFirstResult(page*10)
+                .setMaxResults(page*10+10)
+                .getResultList();
+    }
+
     public List<FreePost> findAvailableAllFreePosts(){
         return em.createQuery("select p from FreePost p", FreePost.class).getResultList().stream().filter(x->x.getAvailable()==true).collect(Collectors.toList());
+    }
+
+    public List<FreePost> findAvailablePagingFreePosts(int page){
+        return em.createQuery("select p from FreePost p where p.available = :available order by p.createdDate desc", FreePost.class)
+                .setParameter("available",true)
+                .setFirstResult(page*10)
+                .setMaxResults(page*10+10)
+                .getResultList();
     }
 
     public List<Post> findAll(){

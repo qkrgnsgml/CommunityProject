@@ -33,6 +33,17 @@ public class FreePostController {
         return "posts/freepost/freePostList";
     }
 
+    @GetMapping("/freeposts/{pageNum}")
+    public String freePostListPage(@SessionAttribute(name = "loginUser", required = false) User loginUser,
+                               @PathVariable int pageNum, Model model) {
+        int size = postService.findAvailableFreePosts().size()/10 + 1;
+        List<FreePost> freePosts = postService.findAvailablePagingFreePosts(pageNum);
+        model.addAttribute("link", loginUser==null ? "login" : "freepost");
+        model.addAttribute("size", size);
+        model.addAttribute("posts", freePosts);
+        return "posts/freepost/freePostList";
+    }
+
     @GetMapping("/freepost")
     public String createFreePostForm(FreePostDTO freePostDTO) {
         log.info("createFreePostForm");

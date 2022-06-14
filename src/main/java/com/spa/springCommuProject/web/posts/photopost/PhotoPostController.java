@@ -37,6 +37,17 @@ public class PhotoPostController {
         return "posts/photopost/photoPostList";
     }
 
+    @GetMapping("/photoposts/{pageNum}")
+    public String photoPostListPage(@SessionAttribute(name = "loginUser", required = false) User loginUser,
+                                   @PathVariable int pageNum, Model model) {
+        int size = postService.findAvailablePhotoPosts().size()/10 + 1;
+        List<PhotoPost> photoPosts = postService.findAvailablePagingPhotoPosts(pageNum);
+        model.addAttribute("link", loginUser==null ? "login" : "photopost");
+        model.addAttribute("size", size);
+        model.addAttribute("posts", photoPosts);
+        return "posts/photopost/photoPostList";
+    }
+
     @GetMapping("/photopost")
     public String createPhotoPostForm(PhotoPostDTO photoPostDTO) {
         log.info("createPhotoPostForm");

@@ -7,10 +7,10 @@
 <body>
     <header th:replace="~{fragment/header :: menubar}"></header>
 <!--    <h4 th:text="|로그인: ${user.nickName} 님 어서오세요|">로그인 사용자 이름</h4>-->
-    <div style="float: left;">
+    <div style="float: left;text-align: center;margin-left: 18%">
         <side th:replace="~{fragment/loginside.html :: sidebar(nickName=${user.nickName}, id=${user.id}, ranks=${ranks})}"></side>
     </div>
-    <div style="float: left">
+    <div style="float: left;margin-left: 8%">
         <table th:replace="~{fragment/imagetable.html :: imagetable(images=${images})}"></table>
     </div>
 </body>

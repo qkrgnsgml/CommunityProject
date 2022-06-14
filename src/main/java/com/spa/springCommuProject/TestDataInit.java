@@ -1,7 +1,6 @@
 package com.spa.springCommuProject;
 
 import com.spa.springCommuProject.domain.post.entity.FreePost;
-import com.spa.springCommuProject.domain.post.entity.PhotoPost;
 import com.spa.springCommuProject.domain.post.entity.VideoPost;
 import com.spa.springCommuProject.domain.post.service.PostService;
 import com.spa.springCommuProject.domain.user.BigThreePower;
@@ -28,11 +27,11 @@ public class TestDataInit {
         User user = new User("root","root","1234");
         user.setRole(Role.MASTER);
         userService.join(user);
-        PhotoPost photoPost = new PhotoPost(user, "PhotoTitle", "PhotoContent");
+        //PhotoPost photoPost = new PhotoPost(user, "PhotoTitle", "PhotoContent");
         FreePost post = new FreePost(user, "FreeTitle", "FreeContent");
         VideoPost videoPost = new VideoPost(user, "VideoTitle", "VideoContent");
         postService.savePost(post);
-        postService.savePost(photoPost);
+        //postService.savePost(photoPost);
         postService.savePost(videoPost);
         User user1 = new User("1234", "1234", "1234");
         User user2 = new User("1235", "1235", "1234");

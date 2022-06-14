@@ -37,6 +37,17 @@ public class VideoPostController {
         return "posts/videopost/videoPostList";
     }
 
+    @GetMapping("/videoposts/{pageNum}")
+    public String videoPostListPage(@SessionAttribute(name = "loginUser", required = false) User loginUser,
+                                    @PathVariable int pageNum, Model model) {
+        int size = postService.findAvailableVideoPosts().size()/10 + 1;
+        List<VideoPost> videoPosts = postService.findAvailablePagingVideoPosts(pageNum);
+        model.addAttribute("link", loginUser==null ? "login" : "videopost");
+        model.addAttribute("size", size);
+        model.addAttribute("posts", videoPosts);
+        return "posts/videopost/videoPostList";
+    }
+
     @GetMapping("/videopost")
     public String createVideoPostForm(VideoPostDTO videoPostDTO) {
         log.info("createVideoPostForm");

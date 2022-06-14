@@ -16,12 +16,20 @@
     <div>
         <h3>랭킹</h3>
     </div>
-    <div>
-        <table>
+    <div style="text-align: center">
+        <table style="display: inline-block">
+            <thead>
+            <tr>
+                <th>닉네임</th>
+                <th>3대력</th>
+            </tr>
+            </thead>
+            <tbody>
             <tr th:each="rank : ${ranks}">
                 <td th:text="${rank.nickName}"></td>
                 <td th:text="${rank.bigThreePower.sum}"></td>
             </tr>
+            </tbody>
         </table>
     </div>
 </side>
