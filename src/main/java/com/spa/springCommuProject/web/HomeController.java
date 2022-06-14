@@ -1,7 +1,9 @@
 package com.spa.springCommuProject.web;
 
+import com.spa.springCommuProject.domain.post.entity.FreePost;
 import com.spa.springCommuProject.domain.post.entity.Image;
 import com.spa.springCommuProject.domain.post.entity.PhotoPost;
+import com.spa.springCommuProject.domain.post.entity.VideoPost;
 import com.spa.springCommuProject.domain.post.service.FileService;
 import com.spa.springCommuProject.domain.post.service.PostService;
 import com.spa.springCommuProject.domain.user.User;
@@ -37,6 +39,12 @@ public class HomeController {
 
         List<PhotoPost> photoPosts = postService.findAvailableAllPhotoPostViewDesc();
         model.addAttribute("photoPosts",photoPosts);
+
+        List<FreePost> freePosts = postService.mainPageFreePosts();
+        model.addAttribute("freePosts", freePosts);
+
+        List<VideoPost> videoPosts = postService.mainPageVideoPosts();
+        model.addAttribute("videoPosts", videoPosts);
 
 //        for (PhotoPost photoPost : photoPosts) {
 //            Optional image = fileService.findOneImageByPostId(photoPost.getId());

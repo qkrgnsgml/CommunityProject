@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div style="float: left;margin-left: 6%;width: 30%" th:fragment="videopoststable(posts)">
+    <table style="text-align: center;width:100%; margin: auto;" border="1">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th style="width:40%">제목</th>
+            <th>글쓴이</th>
+            <th>조회수</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--            th:if="${post.available} == true"-->
+        <tr th:each="post : ${posts}">
+            <td th:text="${post.id}"></td>
+            <td><a th:href="@{/videopost/{id} (id=${post.id})}">[[${post.title}]]</a></td>
+            <td th:text="${post.user.nickName}"></td>
+            <td th:text="${post.view}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -6,12 +6,19 @@
 </head>
 <body>
 <header th:replace="~{fragment/header.html :: menubar}"></header>
-
-<div style="float: left;text-align: center;margin-left: 18%">
-    <side th:replace="~{fragment/side.html :: sidebar(ranks=${ranks})}"></side>
+<div style="overflow: hidden;">
+    <div style="float: left;text-align: center;margin-left: 18%">
+        <side th:replace="~{fragment/side.html :: sidebar(ranks=${ranks})}"></side>
+    </div>
+    <div style="float: left;margin-left: 8%">
+        <table th:replace="~{fragment/imagetable.html :: imagetable(images=${images})}"></table>
+    </div>
 </div>
-<div style="float: left;margin-left: 8%">
-    <table th:replace="~{fragment/imagetable.html :: imagetable(images=${images})}"></table>
+<br>
+<br>
+<div style="overflow: hidden;">
+    <div th:replace="~{fragment/freepoststable.html:: freepoststable(posts=${freePosts})}"></div>
+    <div th:replace="~{fragment/videopoststable.html:: videopoststable(posts=${videoPosts})}"></div>
 </div>
 
 </body>

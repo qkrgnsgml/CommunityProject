@@ -61,6 +61,14 @@ public class PostRepository {
                 .getResultList();
     }
 
+    public List<VideoPost> mainPageVideoPosts(){
+        return em.createQuery("select v from VideoPost v where v.available = :available order by v.view desc", VideoPost.class)
+                .setParameter("available",true)
+                .setFirstResult(0)
+                .setMaxResults(5)
+                .getResultList();
+    }
+
     public List<FreePost> findAvailableAllFreePosts(){
         return em.createQuery("select p from FreePost p", FreePost.class).getResultList().stream().filter(x->x.getAvailable()==true).collect(Collectors.toList());
     }
@@ -70,6 +78,14 @@ public class PostRepository {
                 .setParameter("available",true)
                 .setFirstResult(page*10)
                 .setMaxResults(page*10+10)
+                .getResultList();
+    }
+
+    public List<FreePost> mainPageFreePosts(){
+        return em.createQuery("select p from FreePost p where p.available = :available order by p.view desc", FreePost.class)
+                .setParameter("available",true)
+                .setFirstResult(0)
+                .setMaxResults(5)
                 .getResultList();
     }
 

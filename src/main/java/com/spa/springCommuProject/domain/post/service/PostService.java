@@ -41,6 +41,10 @@ public class PostService {
         return postRepository.findAvailablePagingFreePosts(page);
     }
 
+    public List<FreePost> mainPageFreePosts(){
+        return postRepository.mainPageFreePosts();
+    }
+
     public List<PhotoPost> findAvailablePhotoPosts(){
         return postRepository.findAvailableAllPhotoPost();
     }
@@ -59,6 +63,10 @@ public class PostService {
 
     public List<VideoPost> findAvailablePagingVideoPosts(int page){
         return postRepository.findAvailablePagingVideoPosts(page);
+    }
+
+    public List<VideoPost> mainPageVideoPosts(){
+        return postRepository.mainPageVideoPosts();
     }
 
     public List<Post> findAllPosts(){
