@@ -127,7 +127,7 @@ public class FreePostController {
 
         postService.deletePost(postId);
 
-        return "redirect:/freeposts";
+        return "redirect:/freeposts/0";
     }
 
 

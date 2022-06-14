@@ -144,7 +144,7 @@ public class PhotoPostController {
 
         postService.deletePost(postId);
 
-        return "redirect:/photoposts";
+        return "redirect:/photoposts/0";
     }
 
 

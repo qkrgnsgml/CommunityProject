@@ -144,7 +144,7 @@ public class VideoPostController {
 
         postService.deletePost(postId);
 
-        return "redirect:/videoposts";
+        return "redirect:/videoposts/0";
     }
 
 
