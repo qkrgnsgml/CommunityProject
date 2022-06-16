@@ -20,12 +20,14 @@
         <table style="display: inline-block">
             <thead>
             <tr>
+                <th>순위</th>
                 <th>닉네임</th>
                 <th>3대력</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="rank : ${ranks}">
+            <tr th:each="rank, i : ${ranks}">
+                <td th:text="${i.count}"></td>
                 <td th:text="${rank.nickName}"></td>
                 <td th:text="${rank.bigThreePower.sum}"></td>
             </tr>

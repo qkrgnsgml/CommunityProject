@@ -17,8 +17,8 @@
         </thead>
         <tbody>
         <!--            th:if="${post.available} == true"-->
-        <tr th:each="post : ${posts}">
-            <td th:text="${post.id}"></td>
+        <tr th:each="post, i  : ${posts}">
+            <td th:text="${i.count}"></td>
             <td><a th:href="@{/videopost/{id} (id=${post.id})}">[[${post.title}]]</a></td>
             <td th:text="${post.user.nickName}"></td>
             <td th:text="${post.view}"></td>
